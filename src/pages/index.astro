@@ -6,6 +6,7 @@ import photo4 from '../assets/photos/4.jpg';
 import photo5crop from '../assets/photos/5-crop.jpg';
 import photo6 from '../assets/photos/6.jpg';
 import photo8 from '../assets/photos/8.jpg';
+import photo9 from '../assets/photos/9.jpg';
 import photo10 from '../assets/photos/10.jpg';
 
 const heroWords = ['This', 'is', 'a', 'poem.'];
@@ -18,6 +19,7 @@ const services = [
     href: '/experiences#live',
     img: photo4,
     imgAlt: 'Two hands exchanging a small cream card across a candlelit dinner table',
+    caption: 'fig. 01 — a poem changes hands',
   },
   {
     title: 'Participatory Programmes',
@@ -26,6 +28,7 @@ const services = [
     href: '/experiences#programmes',
     img: photo8,
     imgAlt: 'Hands writing on paper cards around a shared wooden workshop table, seen from above',
+    caption: 'fig. 02 — a collective draft',
   },
   {
     title: 'Creative Commissions',
@@ -34,6 +37,7 @@ const services = [
     href: '/experiences#commissions',
     img: photo6,
     imgAlt: 'Cream paper cards pinned in a constellation on a gallery wall as a visitor reads one',
+    caption: 'fig. 03 — verses, pinned',
   },
 ];
 
@@ -85,40 +89,56 @@ const margins = [
   title="Verseworks — This is a poem."
   description="Verseworks is a multilingual poetry studio creating live, participatory experiences for festivals, cultural institutions, immersive events, hotels and brands."
 >
-  <!-- 1 · Intriga -->
-  <section class="mx-auto max-w-[68rem] px-6 pt-[14vh] pb-[12vh]">
-    <h1 class="font-display text-hero text-ink">
-      {
-        heroWords.map((w, i) => (
-          <Fragment>
-            {/* El espacio vive FUERA del span: dentro de un inline-block se colapsa */}
-            <span
-              class:list={['hero-word', i === heroWords.length - 1 && 'cursor italic']}
-              style={`animation-delay:${(0.15 + i * 0.34).toFixed(2)}s`}
-            >{w}</span>
-            {i < heroWords.length - 1 && ' '}
-          </Fragment>
-        ))
-      }
-    </h1>
-    <p class="font-reading mt-8 max-w-xl text-lg text-ink-soft">
-      Live words for memorable gatherings.
-    </p>
-    <p class="mt-6 max-w-xl text-[0.98rem] leading-relaxed text-ink-soft">
-      Verseworks is a multilingual poetry studio creating live, participatory
-      experiences for festivals, cultural institutions, immersive events, hotels
-      and brands.
-    </p>
-    <a href="/enquire" class="btn mt-10">Plan a poetry experience</a>
+  <!-- 1 · Intriga: portada de libro sobre la esquina del hotel -->
+  <section class="relative flex min-h-[92vh] flex-col justify-end overflow-hidden bg-ink text-paper">
+    <Image
+      src={photo9}
+      alt=""
+      class="absolute inset-0 h-full w-full scale-105 object-cover"
+      widths={[768, 1088, 1600, 2048]}
+      sizes="100vw"
+      loading="eager"
+      fetchpriority="high"
+    />
+    <div class="absolute inset-0 bg-linear-to-t from-ink/90 via-ink/35 to-ink/20"></div>
+    <div class="relative mx-auto w-full max-w-[68rem] px-6 pt-[24vh] pb-[10vh]">
+      <h1 class="font-display text-hero">
+        {
+          heroWords.map((w, i) => (
+            <Fragment>
+              {/* El espacio vive FUERA del span: dentro de un inline-block se colapsa */}
+              <span
+                class:list={['hero-word', i === heroWords.length - 1 && 'cursor italic']}
+                style={`animation-delay:${(0.15 + i * 0.34).toFixed(2)}s`}
+              >{w}</span>
+              {i < heroWords.length - 1 && ' '}
+            </Fragment>
+          ))
+        }
+      </h1>
+      <p class="font-reading mt-8 max-w-xl text-lg text-paper/85">
+        Live words for memorable gatherings.
+      </p>
+      <p class="mt-6 max-w-xl text-[0.98rem] leading-relaxed text-paper/70">
+        Verseworks is a multilingual poetry studio creating live, participatory
+        experiences for festivals, cultural institutions, immersive events, hotels
+        and brands.
+      </p>
+      <a
+        href="/enquire"
+        class="btn mt-10 border-paper text-paper hover:bg-paper hover:text-ink"
+        >Plan a poetry experience</a
+      >
+    </div>
   </section>
 
-  <!-- 2 · Explicación: la escena -->
+  <!-- 2 · Explicación: pliego de libro — texto a la izquierda, foto sangrada -->
   <section class="relative border-t border-line">
     <p class="marginalia reveal mt-16 px-6 lg:px-0">{margins[0]}<br />{margins[1]}</p>
-    <div class="mx-auto max-w-[68rem] px-6 py-16 lg:py-24">
-      <p class="kicker reveal">Poetry, happening here</p>
-      <div class="mt-8 grid gap-10 lg:grid-cols-12 lg:items-center lg:gap-14">
-        <div class="font-reading max-w-2xl space-y-5 text-xl text-ink lg:col-span-5">
+    <div class="grid lg:grid-cols-2">
+      <div class="px-6 py-16 lg:gutter-l lg:py-24 lg:pr-16">
+        <p class="kicker reveal">Poetry, happening here</p>
+        <div class="font-reading mt-8 max-w-xl space-y-5 text-xl text-ink">
           <p class="reveal">A guest offers a memory, a feeling, a place or a few words.</p>
           <p class="reveal pl-[1.5em]">A poet listens.</p>
           <p class="reveal">
@@ -126,27 +146,25 @@ const margins = [
             that person in that moment.
           </p>
         </div>
-        <figure class="reveal lg:col-span-7">
-          <Image
-            src={photo1}
-            alt="A poet listening closely to a guest across a table with a mint green typewriter between them"
-            class="aspect-[3/2] w-full object-cover"
-            widths={[640, 960, 1280, 1920]}
-            sizes="(min-width: 1024px) 36rem, calc(100vw - 3rem)"
-            loading="eager"
-            fetchpriority="high"
-          />
-        </figure>
+        <p class="reveal mt-8 max-w-xl leading-relaxed text-ink-soft">
+          It might be typed, handwritten, printed, projected or spoken aloud. It
+          might be created in English, Arabic, French, Spanish or another language
+          chosen for the audience. The poem becomes an encounter and part of the
+          bigger story.
+        </p>
+        <p class="font-display text-title reveal mt-12 italic">
+          We turn audiences from spectators into participants.
+        </p>
       </div>
-      <p class="reveal mt-8 max-w-2xl leading-relaxed text-ink-soft">
-        It might be typed, handwritten, printed, projected or spoken aloud. It
-        might be created in English, Arabic, French, Spanish or another language
-        chosen for the audience. The poem becomes an encounter and part of the
-        bigger story.
-      </p>
-      <p class="font-display text-title reveal mt-12 max-w-3xl italic">
-        We turn audiences from spectators into participants.
-      </p>
+      <figure class="reveal border-t border-line lg:border-t-0 lg:border-l">
+        <Image
+          src={photo1}
+          alt="A poet listening closely to a guest across a table with a mint green typewriter between them"
+          class="h-72 w-full object-cover sm:h-96 lg:h-full"
+          widths={[640, 960, 1280, 1920]}
+          sizes="(min-width: 1024px) 50vw, 100vw"
+        />
+      </figure>
     </div>
   </section>
 
@@ -163,10 +181,13 @@ const margins = [
                 <Image
                   src={s.img}
                   alt={s.imgAlt}
-                  class="aspect-[4/3] w-full object-cover"
+                  class="aspect-[4/3] w-full object-cover mix-blend-multiply"
                   widths={[480, 800, 1120]}
                   sizes="(min-width: 640px) 28rem, calc(100vw - 3rem)"
                 />
+                <figcaption class="mt-3 font-mono text-[0.72rem] tracking-[0.08em] text-ink-faint">
+                  {s.caption}
+                </figcaption>
               </figure>
               <div class="mt-6 flex flex-col gap-4 lg:flex-row lg:items-baseline lg:gap-12">
                 <h2 class="font-display text-display flex-1 text-ink">{s.title}</h2>
@@ -187,19 +208,19 @@ const margins = [
     </div>
   </section>
 
-  <!-- 4 · Posibilidades: letanía de lugares -->
-  <section class="relative border-t border-line">
-    <p class="marginalia reveal mt-16 px-6 lg:px-0">{margins[3]}</p>
-    <div class="mx-auto max-w-[68rem] px-6 py-16 lg:py-24">
-      <h2 class="font-display text-display reveal max-w-3xl text-ink">
+  <!-- 4 · Posibilidades: letanía de lugares, sobre tinta -->
+  <section class="relative border-t border-line bg-ink text-paper">
+    <p class="marginalia marginalia--paper reveal mt-16 px-6 lg:px-0">{margins[3]}</p>
+    <div class="mx-auto max-w-[68rem] px-6 pt-16 lg:pt-24">
+      <h2 class="font-display text-display reveal max-w-3xl">
         One poet. One typewriter. An entire room transformed.
       </h2>
-      <p class="reveal mt-6 text-ink-soft">Verseworks can appear almost anywhere.</p>
+      <p class="reveal mt-6 text-paper/70">Verseworks can appear almost anywhere.</p>
       <ul class="font-reading mt-10 max-w-2xl text-xl">
         {
           places.map((p, i) => (
             <li
-              class="reveal border-b border-line py-3 text-ink last:border-b-0"
+              class="reveal border-b border-paper/15 py-3 last:border-b-0"
               style={`transition-delay:${i * 60}ms`}
             >
               {p}
@@ -207,19 +228,19 @@ const margins = [
           ))
         }
       </ul>
-      <figure class="reveal mt-12">
-        <Image
-          src={photo10}
-          alt="A long candlelit dinner table with a small card resting at each place setting"
-          class="aspect-[21/9] w-full object-cover"
-          widths={[768, 1088, 1600, 2048]}
-          sizes="(min-width: 68rem) 65rem, calc(100vw - 3rem)"
-        />
-      </figure>
-      <p class="reveal mt-8 max-w-2xl text-ink-soft">
+      <p class="reveal mt-8 max-w-2xl pb-14 text-paper/70 lg:pb-20">
         Each experience is developed for the people and place it belongs to.
       </p>
     </div>
+    <figure class="reveal">
+      <Image
+        src={photo10}
+        alt="A long candlelit dinner table with a small card resting at each place setting"
+        class="aspect-[16/9] w-full object-cover sm:aspect-[21/9]"
+        widths={[768, 1088, 1600, 2048]}
+        sizes="100vw"
+      />
+    </figure>
   </section>
 
   <!-- 5 · Audiencias -->
@@ -283,13 +304,14 @@ const margins = [
         across an entire festival, Verseworks can shape the concept, select the
         artists and support the experience from beginning to end.
       </p>
-      <figure class="reveal mt-12 max-w-md">
+      {/* La foto nocturna cruza el borde hacia el bloque de tinta */}
+      <figure class="reveal relative z-10 mt-12 ml-auto w-64 -mb-20 sm:w-80 sm:-mb-24">
         <Image
           src={photo5crop}
           alt="A guest reading a small card under warm string lights at an evening gathering"
           class="aspect-[4/5] w-full object-cover"
           widths={[480, 800, 1120]}
-          sizes="(min-width: 640px) 28rem, calc(100vw - 3rem)"
+          sizes="20rem"
         />
       </figure>
     </div>
@@ -297,7 +319,7 @@ const margins = [
 
   <!-- 8 · El margen, reunido + invitación -->
   <section class="border-t border-line bg-ink text-paper">
-    <div class="mx-auto max-w-[68rem] px-6 py-20 lg:py-28">
+    <div class="mx-auto max-w-[68rem] px-6 pt-32 pb-20 lg:pt-40 lg:pb-28">
       <p class="reveal font-mono text-[0.8rem] leading-loose text-paper/60">
         {margins.map((m) => <span class="block">{m}</span>)}
       </p>

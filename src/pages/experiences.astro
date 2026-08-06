@@ -15,8 +15,10 @@ const blocks = [
     cta: 'Plan a live experience',
     img: photo2,
     imgAlt: 'A hand writing a poem with a fountain pen on a small cream card',
+    imgCaption: 'ink, still wet',
     extra: photo7,
     extraAlt: 'A stack of blank cream cards tied with string beside a brass object',
+    extraCaption: 'cards, waiting',
   },
   {
     id: 'programmes',
@@ -25,6 +27,7 @@ const blocks = [
     cta: 'Create a participatory programme',
     img: photo8,
     imgAlt: 'Hands writing on paper cards around a shared wooden workshop table, seen from above',
+    imgCaption: 'the table, mid-poem',
   },
   {
     id: 'commissions',
@@ -33,6 +36,7 @@ const blocks = [
     cta: 'Commission a poem',
     img: photo6,
     imgAlt: 'Cream paper cards pinned in a constellation on a gallery wall as a visitor reads one',
+    imgCaption: 'a wall of verses',
   },
 ];
 ---
@@ -57,25 +61,33 @@ const blocks = [
         <div class="mx-auto max-w-[68rem] px-6 py-16">
           <h2 class="font-display text-display reveal text-ink">{b.title}</h2>
           <p class="font-reading reveal mt-5 max-w-2xl text-lg text-ink-soft">{b.lead}</p>
-          <div class="mt-10 grid items-end gap-6 sm:grid-cols-3">
-            <figure class="reveal sm:col-span-2">
+          <div class="mt-10 grid items-start gap-6 sm:grid-cols-3">
+            <figure
+              class:list={['reveal sm:col-span-2', b.id === 'commissions' && 'sm:col-start-2']}
+            >
               <Image
                 src={b.img}
                 alt={b.imgAlt}
-                class="aspect-[3/2] w-full object-cover"
+                class="aspect-[3/2] w-full object-cover mix-blend-multiply"
                 widths={[640, 960, 1280, 1600]}
                 sizes="(min-width: 68rem) 43rem, (min-width: 640px) 66vw, calc(100vw - 3rem)"
               />
+              <figcaption class="mt-3 font-mono text-[0.72rem] tracking-[0.08em] text-ink-faint">
+                {b.imgCaption}
+              </figcaption>
             </figure>
             {b.extra && (
-              <figure class="reveal">
+              <figure class="reveal sm:mt-14">
                 <Image
                   src={b.extra}
                   alt={b.extraAlt}
-                  class="aspect-square w-full object-cover"
+                  class="aspect-square w-full object-cover mix-blend-multiply"
                   widths={[400, 640, 960]}
                   sizes="(min-width: 68rem) 21rem, (min-width: 640px) 33vw, calc(100vw - 3rem)"
                 />
+                <figcaption class="mt-3 font-mono text-[0.72rem] tracking-[0.08em] text-ink-faint">
+                  {b.extraCaption}
+                </figcaption>
               </figure>
             )}
           </div>

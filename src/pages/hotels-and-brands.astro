@@ -23,28 +23,25 @@ import photo10 from '../assets/photos/10.jpg';
       belong within the wider identity of the host.
     </p>
     <a href="/enquire" class="btn mt-10">Create an experience</a>
-    <figure class="reveal mt-16">
-      <Image
-        src={photo9}
-        alt="A quiet hotel corner with a green typewriter on a wooden desk between two armchairs under a warm lamp"
-        class="aspect-[3/2] w-full object-cover"
-        widths={[768, 1088, 1600, 2048]}
-        sizes="(min-width: 68rem) 65rem, calc(100vw - 3rem)"
-      />
-    </figure>
   </section>
 
-  <section class="border-t border-line">
-    <div class="mx-auto max-w-[68rem] px-6 py-16">
-      <figure class="reveal">
-        <Image
-          src={photo10}
-          alt="A long candlelit dinner table with a small card resting at each place setting"
-          class="aspect-[21/9] w-full object-cover"
-          widths={[768, 1088, 1600, 2048]}
-          sizes="(min-width: 68rem) 65rem, calc(100vw - 3rem)"
-        />
-      </figure>
-    </div>
-  </section>
+  <figure class="reveal overflow-hidden border-t border-line">
+    <Image
+      src={photo9}
+      alt="A quiet hotel corner with a green typewriter on a wooden desk between two armchairs under a warm lamp"
+      class="aspect-[3/2] w-full scale-105 object-cover sm:aspect-[2/1]"
+      widths={[768, 1088, 1600, 2048]}
+      sizes="100vw"
+    />
+  </figure>
+
+  <figure class="reveal border-t border-line">
+    <Image
+      src={photo10}
+      alt="A long candlelit dinner table with a small card resting at each place setting"
+      class="aspect-[16/9] w-full object-cover sm:aspect-[21/9]"
+      widths={[768, 1088, 1600, 2048]}
+      sizes="100vw"
+    />
+  </figure>
 </Base>

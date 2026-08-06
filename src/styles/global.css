@@ -139,6 +139,18 @@ body {
   }
 }
 
+/* Marginalia sobre secciones de tinta */
+.marginalia--paper {
+  color: rgb(250 247 241 / 0.45);
+}
+
+/* Pliego: alinea el contenido con la retícula global (68rem + px-6)
+   en secciones que no usan el contenedor centrado, para que una foto
+   pueda sangrar hasta el borde del viewport del otro lado. */
+@utility gutter-l {
+  padding-left: max(1.5rem, calc((100vw - 68rem) / 2 + 1.5rem));
+}
+
 /* Botones: rectángulo de imprenta, sin adornos */
 .btn {
   display: inline-block;
