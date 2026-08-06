@@ -20,6 +20,7 @@ const services = [
     img: photo4,
     imgAlt: 'Two hands exchanging a small cream card across a candlelit dinner table',
     caption: 'fig. 01 — a poem changes hands',
+    verse: 'listen.',
   },
   {
     title: 'Participatory Programmes',
@@ -29,6 +30,7 @@ const services = [
     img: photo8,
     imgAlt: 'Hands writing on paper cards around a shared wooden workshop table, seen from above',
     caption: 'fig. 02 — a collective draft',
+    verse: 'write.',
   },
   {
     title: 'Creative Commissions',
@@ -38,6 +40,7 @@ const services = [
     img: photo6,
     imgAlt: 'Cream paper cards pinned in a constellation on a gallery wall as a visitor reads one',
     caption: 'fig. 03 — verses, pinned',
+    verse: 'keep.',
   },
 ];
 
@@ -168,38 +171,63 @@ const margins = [
     </div>
   </section>
 
-  <!-- 3 · Servicios: índice de libro -->
-  <section class="relative border-t border-line bg-paper-deep">
+  <!-- 3 · Servicios: láminas apoyadas sobre el escritorio, en zigzag -->
+  <section class="relative overflow-hidden border-t border-line bg-paper-deep">
     <p class="marginalia reveal mt-16 px-6 lg:px-0">{margins[2]}</p>
     <div class="mx-auto max-w-[68rem] px-6 py-16 lg:py-24">
       <p class="kicker reveal">What we create</p>
-      <ul class="mt-6">
+      <ul class="mt-14 space-y-20 lg:mt-20 lg:space-y-28">
         {
-          services.map((s) => (
-            <li class="reveal border-b border-line py-10 last:border-b-0">
-              <figure class="reveal max-w-md">
+          services.map((s, i) => (
+            <li class="grid items-center gap-8 lg:grid-cols-12 lg:gap-10">
+              <figure
+                class:list={[
+                  'reveal relative',
+                  i % 2 === 0
+                    ? 'lg:col-span-6 lg:col-start-1'
+                    : 'lg:col-span-6 lg:col-start-7 lg:row-start-1',
+                  i === 2 && 'lg:col-start-2',
+                ]}
+              >
                 <Image
                   src={s.img}
                   alt={s.imgAlt}
                   class="aspect-[4/3] w-full object-cover mix-blend-multiply"
+                  style={`rotate:${['-1.2deg', '1deg', '-0.7deg'][i]}`}
                   widths={[480, 800, 1120]}
-                  sizes="(min-width: 640px) 28rem, calc(100vw - 3rem)"
+                  sizes="(min-width: 1024px) 32rem, calc(100vw - 3rem)"
                 />
+                <span
+                  aria-hidden="true"
+                  class:list={[
+                    'font-display reveal absolute -top-7 text-[1.6rem] italic text-ink/70 lg:text-[2rem]',
+                    i % 2 === 0 ? '-right-2 lg:-right-8' : '-left-2 lg:-left-8',
+                  ]}
+                  style={`rotate:${['1.6deg', '-1.4deg', '1deg'][i]};transition-delay:280ms`}
+                >
+                  {s.verse}
+                </span>
                 <figcaption class="mt-3 font-mono text-[0.72rem] tracking-[0.08em] text-ink-faint">
                   {s.caption}
                 </figcaption>
               </figure>
-              <div class="mt-6 flex flex-col gap-4 lg:flex-row lg:items-baseline lg:gap-12">
-                <h2 class="font-display text-display flex-1 text-ink">{s.title}</h2>
-                <div class="max-w-md flex-1">
-                  <p class="leading-relaxed text-ink-soft">{s.body}</p>
-                  <a
-                    href={s.href}
-                    class="kicker mt-5 inline-block text-ink underline decoration-line underline-offset-4 transition-colors hover:decoration-ink"
-                  >
-                    {s.cta} →
-                  </a>
-                </div>
+              <div
+                class:list={[
+                  'reveal lg:col-span-5',
+                  i % 2 === 0 ? 'lg:col-start-8' : 'lg:col-start-1 lg:row-start-1',
+                  i === 1 && 'lg:pb-14',
+                  i === 2 && 'lg:pt-10',
+                ]}
+                style="transition-delay:120ms"
+              >
+                <h2 class="font-display text-display text-ink">{s.title}</h2>
+                <p class="mt-4 max-w-md leading-relaxed text-ink-soft">{s.body}</p>
+                <a
+                  href={s.href}
+                  class="kicker mt-6 inline-block text-ink underline decoration-line underline-offset-4 transition-colors hover:decoration-ink"
+                >
+                  {s.cta} →
+                </a>
               </div>
             </li>
           ))
