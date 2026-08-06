@@ -77,12 +77,14 @@ const margins = [
     <h1 class="font-display text-hero text-ink">
       {
         heroWords.map((w, i) => (
-          <span
-            class:list={['hero-word', i === heroWords.length - 1 && 'cursor italic']}
-            style={`animation-delay:${0.15 + i * 0.34}s`}
-          >
-            {w}{' '}
-          </span>
+          <Fragment>
+            {/* El espacio vive FUERA del span: dentro de un inline-block se colapsa */}
+            <span
+              class:list={['hero-word', i === heroWords.length - 1 && 'cursor italic']}
+              style={`animation-delay:${(0.15 + i * 0.34).toFixed(2)}s`}
+            >{w}</span>
+            {i < heroWords.length - 1 && ' '}
+          </Fragment>
         ))
       }
     </h1>

@@ -125,7 +125,6 @@ body {
   font-size: 0.8rem;
   line-height: 1.5;
   color: var(--color-ink-faint);
-  max-width: 11rem;
 }
 
 @media (min-width: 1024px) {
@@ -133,6 +132,10 @@ body {
     position: absolute;
     left: max(1.5rem, calc((100vw - 68rem) / 2 - 12rem));
     top: 0.4rem;
+    /* El mt-16 es espaciado mobile: en absoluto también desplaza,
+       y hundía la nota sobre el kicker de la sección */
+    margin-top: 0;
+    max-width: 11rem;
   }
 }
 
