@@ -1,5 +1,10 @@
 ---
+import { Image } from 'astro:assets';
 import Base from '../layouts/Base.astro';
+import photo2 from '../assets/photos/2.jpg';
+import photo6 from '../assets/photos/6.jpg';
+import photo7 from '../assets/photos/7.jpg';
+import photo8 from '../assets/photos/8.jpg';
 
 // TODO: volcar el copy completo de EXPERIENCES (ya redactado en el brief).
 const blocks = [
@@ -8,18 +13,26 @@ const blocks = [
     title: 'Live Experiences',
     lead: 'Poems made on the spot, performances, poetic hosting and poems to take home.',
     cta: 'Plan a live experience',
+    img: photo2,
+    imgAlt: 'A hand writing a poem with a fountain pen on a small cream card',
+    extra: photo7,
+    extraAlt: 'A stack of blank cream cards tied with string beside a brass object',
   },
   {
     id: 'programmes',
     title: 'Participatory Programmes',
     lead: 'Workshops, collective poems and community projects — no previous writing experience required.',
     cta: 'Create a participatory programme',
+    img: photo8,
+    imgAlt: 'Hands writing on paper cards around a shared wooden workshop table, seen from above',
   },
   {
     id: 'commissions',
     title: 'Creative Commissions',
     lead: 'Poetry in public space, bespoke texts, installations, publications and editions.',
     cta: 'Commission a poem',
+    img: photo6,
+    imgAlt: 'Cream paper cards pinned in a constellation on a gallery wall as a visitor reads one',
   },
 ];
 ---
@@ -44,7 +57,29 @@ const blocks = [
         <div class="mx-auto max-w-[68rem] px-6 py-16">
           <h2 class="font-display text-display reveal text-ink">{b.title}</h2>
           <p class="font-reading reveal mt-5 max-w-2xl text-lg text-ink-soft">{b.lead}</p>
-          <a href="/enquire" class="btn reveal mt-8">
+          <div class="mt-10 grid items-end gap-6 sm:grid-cols-3">
+            <figure class="reveal sm:col-span-2">
+              <Image
+                src={b.img}
+                alt={b.imgAlt}
+                class="aspect-[3/2] w-full object-cover"
+                widths={[640, 960, 1280, 1600]}
+                sizes="(min-width: 68rem) 43rem, (min-width: 640px) 66vw, calc(100vw - 3rem)"
+              />
+            </figure>
+            {b.extra && (
+              <figure class="reveal">
+                <Image
+                  src={b.extra}
+                  alt={b.extraAlt}
+                  class="aspect-square w-full object-cover"
+                  widths={[400, 640, 960]}
+                  sizes="(min-width: 68rem) 21rem, (min-width: 640px) 33vw, calc(100vw - 3rem)"
+                />
+              </figure>
+            )}
+          </div>
+          <a href="/enquire" class="btn reveal mt-10">
             {b.cta}
           </a>
         </div>
