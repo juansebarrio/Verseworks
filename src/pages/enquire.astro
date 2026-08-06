@@ -1,0 +1,145 @@
+---
+import Base from '../layouts/Base.astro';
+import { actions } from 'astro:actions';
+
+export const prerender = false;
+
+const result = Astro.getActionResult(actions.enquire);
+const sent = result && !result.error;
+
+const field =
+  'w-full border border-line bg-transparent px-4 py-3 text-[0.95rem] text-ink placeholder:text-ink-faint focus:border-ink focus:outline-none';
+const label = 'kicker mb-2 block';
+---
+
+<Base
+  title="Enquire — Verseworks"
+  description="Tell us what you are planning, where it will happen and who will be there. We will help shape the right poetic response."
+>
+  <section class="mx-auto max-w-[68rem] px-6 pt-[10vh] pb-16">
+    <h1 class="font-display text-hero max-w-4xl text-ink">
+      Perhaps your event is already a poem.
+    </h1>
+    <p class="font-reading mt-6 max-w-xl text-lg text-ink-soft">
+      Let us help you find its form.
+    </p>
+    <p class="mt-6 max-w-xl leading-relaxed text-ink-soft">
+      You do not need to have everything worked out. Tell us what you are
+      planning, where it will happen and who will be there. We will help shape
+      the right poetic response.
+    </p>
+  </section>
+
+  <section class="border-t border-line bg-paper-deep">
+    <div class="mx-auto max-w-[68rem] px-6 py-16">
+      {
+        sent ? (
+          <div class="max-w-xl">
+            <p class="font-display text-display cursor text-ink">Received.</p>
+            <p class="mt-6 leading-relaxed text-ink-soft">
+              Thank you — your enquiry is with us. We will reply soon to help
+              find the poem inside your plans.
+            </p>
+            <a href="/" class="btn mt-10">
+              Back to the beginning
+            </a>
+          </div>
+        ) : (
+          <form
+            method="POST"
+            action={actions.enquire}
+            class="grid max-w-2xl gap-7 sm:grid-cols-2"
+          >
+            <div>
+              <label for="name" class={label}>
+                Your name
+              </label>
+              <input id="name" name="name" required class={field} />
+            </div>
+            <div>
+              <label for="organisation" class={label}>
+                Organisation
+              </label>
+              <input id="organisation" name="organisation" class={field} />
+            </div>
+            <div class="sm:col-span-2">
+              <label for="email" class={label}>
+                Email
+              </label>
+              <input id="email" name="email" type="email" required class={field} />
+            </div>
+            <div class="sm:col-span-2">
+              <label for="planning" class={label}>
+                What are you planning?
+              </label>
+              <textarea id="planning" name="planning" rows="4" required class={field} />
+            </div>
+            <div>
+              <label for="location" class={label}>
+                Where will it take place?
+              </label>
+              <input id="location" name="location" class={field} />
+            </div>
+            <div>
+              <label for="date" class={label}>
+                When will it happen?
+              </label>
+              <input id="date" name="date" class={field} />
+            </div>
+            <div>
+              <label for="audience" class={label}>
+                Approximately how many people?
+              </label>
+              <input id="audience" name="audience" class={field} />
+            </div>
+            <div>
+              <label for="languages" class={label}>
+                Languages you would like included
+              </label>
+              <input id="languages" name="languages" class={field} />
+            </div>
+            <div class="sm:col-span-2">
+              <label for="budget" class={label}>
+                Estimated budget or budget range
+              </label>
+              <input id="budget" name="budget" class={field} />
+            </div>
+            <div class="sm:col-span-2">
+              <label for="notes" class={label}>
+                Anything else we should know?
+              </label>
+              <textarea id="notes" name="notes" rows="3" class={field} />
+            </div>
+            <div class="sm:col-span-2">
+              <label for="source" class={label}>
+                How did you hear about Verseworks? (optional)
+              </label>
+              <input id="source" name="source" class={field} />
+            </div>
+            <p class="absolute left-[-9999px]" aria-hidden="true">
+              <label>
+                Leave this field empty
+                <input name="website" tabindex="-1" autocomplete="off" />
+              </label>
+            </p>
+            {result?.error && (
+              <p class="font-mono text-[0.8rem] text-ink sm:col-span-2">
+                {result.error.message}
+              </p>
+            )}
+            <div class="sm:col-span-2">
+              <button type="submit" class="btn">
+                Send your enquiry
+              </button>
+            </div>
+          </form>
+        )
+      }
+      <div class="mt-16 border-t border-line pt-8 font-mono text-[0.8rem] text-ink-faint">
+        <p>Prefer to begin by email?</p>
+        <p class="mt-1 text-ink">hello@verseworks.example — TODO: email real</p>
+        <p class="mt-1">Based in [LOCATION] and available for projects internationally.</p>
+      </div>
+    </div>
+  </section>
+</Base>

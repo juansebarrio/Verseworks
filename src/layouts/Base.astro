@@ -1,0 +1,111 @@
+---
+import '../styles/global.css';
+import '@fontsource-variable/literata';
+import '@fontsource-variable/hanken-grotesk';
+import '@fontsource/courier-prime';
+import '@fontsource/courier-prime/400-italic.css';
+import '@fontsource/amiri';
+
+interface Props {
+  title: string;
+  description: string;
+}
+
+const { title, description } = Astro.props;
+const nav = [
+  { href: '/experiences', label: 'Experiences' },
+  { href: '/about', label: 'About' },
+];
+const path = Astro.url.pathname;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="/og.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="generator" content={Astro.generator} />
+  </head>
+  <body>
+    <header class="border-b border-line">
+      <div
+        class="mx-auto flex max-w-[68rem] items-baseline justify-between gap-6 px-6 py-5"
+      >
+        <a
+          href="/"
+          class="font-sans text-[0.82rem] font-medium tracking-[0.32em] text-ink"
+          >VERSEWORKS</a
+        >
+        <nav class="flex items-baseline gap-6" aria-label="Main">
+          {
+            nav.map((item) => (
+              <a
+                href={item.href}
+                aria-current={path.startsWith(item.href) ? 'page' : undefined}
+                class:list={[
+                  'hidden font-sans text-[0.85rem] text-ink-soft transition-colors hover:text-ink sm:inline',
+                  path.startsWith(item.href) && 'text-ink underline underline-offset-4',
+                ]}
+              >
+                {item.label}
+              </a>
+            ))
+          }
+          <a
+            href="/enquire"
+            class="font-mono text-[0.72rem] tracking-[0.16em] uppercase text-ink underline decoration-line underline-offset-4 transition-colors hover:decoration-ink"
+            >Enquire</a
+          >
+        </nav>
+      </div>
+    </header>
+
+    <main><slot /></main>
+
+    <footer class="border-t border-line bg-paper-deep">
+      <div class="mx-auto max-w-[68rem] px-6 py-14">
+        <p class="font-display text-title cursor">This could be a poem.</p>
+        <div
+          class="mt-10 flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between"
+        >
+          <div class="flex flex-col gap-1 text-[0.85rem] text-ink-soft">
+            <a href="/experiences" class="w-fit hover:text-ink">Experiences</a>
+            <a href="/hotels-and-brands" class="w-fit hover:text-ink"
+              >For hotels and brands</a
+            >
+            <a href="/about" class="w-fit hover:text-ink">About</a>
+            <a href="/enquire" class="w-fit hover:text-ink">Enquire</a>
+          </div>
+          <div class="font-mono text-[0.75rem] leading-relaxed text-ink-faint">
+            <p>hello@verseworks.example <span class="text-line">·</span> TODO: email real</p>
+            <p>Based in [LOCATION] — available internationally.</p>
+          </div>
+        </div>
+        <p class="kicker mt-10">© {new Date().getFullYear()} Verseworks</p>
+      </div>
+    </footer>
+
+    <script>
+      const io = new IntersectionObserver(
+        (entries) => {
+          for (const e of entries) {
+            if (e.isIntersecting) {
+              e.target.classList.add('is-in');
+              io.unobserve(e.target);
+            }
+          }
+        },
+        { threshold: 0.15 },
+      );
+      document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
+    </script>
+  </body>
+</html>

@@ -1,0 +1,66 @@
+---
+import Base from '../layouts/Base.astro';
+
+// TODO: volcar el copy completo de EXPERIENCES (ya redactado en el brief).
+const blocks = [
+  {
+    id: 'live',
+    title: 'Live Experiences',
+    lead: 'Poems made on the spot, performances, poetic hosting and poems to take home.',
+    cta: 'Plan a live experience',
+  },
+  {
+    id: 'programmes',
+    title: 'Participatory Programmes',
+    lead: 'Workshops, collective poems and community projects — no previous writing experience required.',
+    cta: 'Create a participatory programme',
+  },
+  {
+    id: 'commissions',
+    title: 'Creative Commissions',
+    lead: 'Poetry in public space, bespoke texts, installations, publications and editions.',
+    cta: 'Commission a poem',
+  },
+];
+---
+
+<Base
+  title="Experiences — Verseworks"
+  description="Poetry becomes an experience when someone enters it. Live experiences, participatory programmes and creative commissions."
+>
+  <section class="mx-auto max-w-[68rem] px-6 pt-[10vh] pb-16">
+    <h1 class="font-display text-hero max-w-4xl text-ink">
+      Poetry becomes an experience when someone enters it.
+    </h1>
+    <p class="mt-8 max-w-xl leading-relaxed text-ink-soft">
+      Verseworks creates encounters that can be heard, held, entered,
+      contributed to and taken home. Our work spans three areas.
+    </p>
+  </section>
+
+  {
+    blocks.map((b) => (
+      <section id={b.id} class="border-t border-line scroll-mt-6">
+        <div class="mx-auto max-w-[68rem] px-6 py-16">
+          <h2 class="font-display text-display reveal text-ink">{b.title}</h2>
+          <p class="font-reading reveal mt-5 max-w-2xl text-lg text-ink-soft">{b.lead}</p>
+          <a href="/enquire" class="btn reveal mt-8">
+            {b.cta}
+          </a>
+        </div>
+      </section>
+    ))
+  }
+
+  <section class="border-t border-line bg-paper-deep">
+    <div class="mx-auto max-w-[68rem] px-6 py-16">
+      <h2 class="font-display text-title reveal text-ink">Not sure what fits?</h2>
+      <p class="reveal mt-4 max-w-xl leading-relaxed text-ink-soft">
+        You do not need to arrive with a finished concept. Tell us about the
+        place, people and occasion. We can recommend an existing format or
+        create something entirely new.
+      </p>
+      <a href="/enquire" class="btn reveal mt-8">Start a conversation</a>
+    </div>
+  </section>
+</Base>
