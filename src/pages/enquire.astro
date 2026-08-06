@@ -7,9 +7,11 @@ export const prerender = false;
 const result = Astro.getActionResult(actions.enquire);
 const sent = result && !result.error;
 
+// Campos sobre papel claro para que se despeguen del fondo profundo
 const field =
-  'w-full border border-line bg-transparent px-4 py-3 text-[0.95rem] text-ink placeholder:text-ink-faint focus:border-ink focus:outline-none';
-const label = 'kicker mb-2 block';
+  'w-full border border-ink/25 bg-paper px-4 py-3 text-[0.95rem] text-ink transition-colors placeholder:text-ink-faint focus:border-ink focus:outline-none';
+const label =
+  'mb-2 block font-mono text-[0.72rem] tracking-[0.18em] uppercase text-ink-soft';
 ---
 
 <Base
@@ -17,7 +19,7 @@ const label = 'kicker mb-2 block';
   description="Tell us what you are planning, where it will happen and who will be there. We will help shape the right poetic response."
 >
   <section class="mx-auto max-w-[68rem] px-6 pt-[10vh] pb-16">
-    <h1 class="font-display text-hero max-w-4xl text-ink">
+    <h1 id="enquire-title" class="font-display text-hero max-w-4xl text-ink">
       Perhaps your event is already a poem.
     </h1>
     <p class="font-reading mt-6 max-w-xl text-lg text-ink-soft">
@@ -72,7 +74,14 @@ const label = 'kicker mb-2 block';
               <label for="planning" class={label}>
                 What are you planning?
               </label>
-              <textarea id="planning" name="planning" rows="4" required class={field} />
+              <textarea
+                id="planning"
+                name="planning"
+                rows="4"
+                required
+                placeholder="A dinner, a festival, a launch, a quiet lobby…"
+                class={field}
+              />
             </div>
             <div>
               <label for="location" class={label}>
@@ -142,4 +151,65 @@ const label = 'kicker mb-2 block';
       </div>
     </div>
   </section>
+
+  <script>
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // El título se tipea letra por letra, como en la máquina.
+    const title = document.getElementById('enquire-title');
+    if (title && !reduced) {
+      const full = (title.textContent ?? '').trim();
+      // Reservar la altura final para que el formulario no salte
+      title.style.minHeight = `${title.offsetHeight}px`;
+      title.setAttribute('aria-label', full);
+      title.textContent = '';
+      title.classList.add('cursor');
+      let i = 0;
+      const type = () => {
+        i++;
+        title.textContent = full.slice(0, i);
+        if (i < full.length) {
+          const ch = full[i - 1];
+          setTimeout(type, ch === ' ' ? 26 : ch === '.' || ch === ',' ? 320 : 36 + Math.random() * 55);
+        }
+      };
+      setTimeout(type, 300);
+    }
+
+    // El campo principal tipea ideas de ejemplo en su placeholder.
+    const planning = document.getElementById('planning') as HTMLTextAreaElement | null;
+    if (planning && !reduced) {
+      const ideas = [
+        'A dinner for twelve under string lights…',
+        'A festival opening night…',
+        'A launch people should remember…',
+        'A quiet corner of a hotel lobby…',
+        'A wedding, a toast, a poem…',
+      ];
+      let idea = 0;
+      let pos = 0;
+      let deleting = false;
+      const step = () => {
+        // En pausa mientras se escribe o hay texto propio
+        if (document.activeElement === planning || planning.value) {
+          setTimeout(step, 900);
+          return;
+        }
+        const text = ideas[idea];
+        pos += deleting ? -2 : 1;
+        planning.placeholder = text.slice(0, Math.max(pos, 0));
+        if (!deleting && pos >= text.length) {
+          deleting = true;
+          setTimeout(step, 1700);
+        } else if (deleting && pos <= 0) {
+          deleting = false;
+          idea = (idea + 1) % ideas.length;
+          setTimeout(step, 350);
+        } else {
+          setTimeout(step, deleting ? 18 : 42 + Math.random() * 45);
+        }
+      };
+      setTimeout(step, 1200);
+    }
+  </script>
 </Base>
