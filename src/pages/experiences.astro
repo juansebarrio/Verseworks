@@ -1,49 +1,21 @@
 ---
 import { Image } from 'astro:assets';
 import Base from '../layouts/Base.astro';
-import installationSquare from '../assets/photos/installation-square.jpg';
 import performanceCrowd from '../assets/photos/performance-crowd.jpg';
 import printedMatter from '../assets/photos/printed-matter.jpg';
-import workshopTable from '../assets/photos/workshop-table.jpg';
 
-// TODO: volcar el copy completo de EXPERIENCES (ya redactado en el brief).
-const blocks = [
-  {
-    id: 'live',
-    title: 'Live Experiences',
-    lead: 'Poems made on the spot, performances, poetic hosting and poems to take home.',
-    cta: 'Plan a live experience',
-    img: performanceCrowd,
-    imgAlt: 'A poet performing surrounded by a standing audience in a contemporary venue',
-    imgCaption: 'a room, listening',
-    extra: printedMatter,
-    extraAlt: 'Poetry posters and thin publications hanging from clips in a design studio',
-    extraCaption: 'editions, hanging',
-  },
-  {
-    id: 'programmes',
-    title: 'Participatory Programmes',
-    lead: 'Workshops, collective poems and community projects — no previous writing experience required.',
-    cta: 'Create a participatory programme',
-    img: workshopTable,
-    imgAlt: 'A group talking and writing together around a large table during a workshop',
-    imgCaption: 'the table, mid-poem',
-  },
-  {
-    id: 'commissions',
-    title: 'Creative Commissions',
-    lead: 'Poetry in public space, bespoke texts, installations, publications and editions.',
-    cta: 'Commission a poem',
-    img: installationSquare,
-    imgAlt: 'People walking between large text installations in a public square',
-    imgCaption: 'verses, in the square',
-  },
+const formats = [
+  'Spoken or performed aloud',
+  'Projected or displayed digitally',
+  'Printed or produced as an object',
+  'Typed or written live, including by typewriter or calligraphy where the format suits the context',
+  'Created in one or several languages',
 ];
 ---
 
 <Base
-  title="Experiences — Verseworks"
-  description="Poetry becomes an experience when someone enters it. Live experiences, participatory programmes and creative commissions."
+  title="Live Experiences — Verseworks"
+  description="Poetry becomes an experience when someone enters it. Poems made live, poetry performances, poetic hosting and poetry that remains."
 >
   <section class="mx-auto max-w-[68rem] px-6 pt-[10vh] pb-16">
     <h1 class="font-display text-hero max-w-4xl text-ink">
@@ -51,53 +23,99 @@ const blocks = [
     </h1>
     <p class="mt-8 max-w-xl leading-relaxed text-ink-soft">
       Verseworks creates encounters that can be heard, held, entered,
-      contributed to and taken home. Our work spans three areas.
+      contributed to and taken home. Our work spans three areas: live
+      experiences, participatory programmes and creative commissions.
     </p>
   </section>
 
-  {
-    blocks.map((b) => (
-      <section id={b.id} class="border-t border-line scroll-mt-6">
-        <div class="mx-auto max-w-[68rem] px-6 py-16">
-          <h2 class="font-display text-display reveal text-ink">{b.title}</h2>
-          <p class="font-reading reveal mt-5 max-w-2xl text-lg text-ink-soft">{b.lead}</p>
-          <div class="mt-10 grid items-start gap-6 sm:grid-cols-3">
-            <figure
-              class:list={['reveal sm:col-span-2', b.id === 'commissions' && 'sm:col-start-2']}
+  <section class="border-t border-line">
+    <div class="mx-auto max-w-[68rem] px-6 py-16">
+      <h2 class="font-display text-display reveal text-ink">Poems made live</h2>
+      <p class="font-reading reveal mt-5 max-w-2xl text-lg text-ink-soft">
+        A live poem can begin with a thought, memory, object, feeling, question
+        or prompt. The response may be written, spoken, performed, projected or
+        created digitally — for one person or with an entire room.
+      </p>
+      <figure class="reveal mt-10 max-w-2xl">
+        <Image
+          src={performanceCrowd}
+          alt="A poet performing surrounded by a standing audience in a contemporary venue"
+          class="aspect-[3/2] w-full object-cover mix-blend-multiply"
+          widths={[640, 960, 1280, 1600]}
+          sizes="(min-width: 768px) 42rem, calc(100vw - 3rem)"
+        />
+        <figcaption class="mt-3 font-mono text-[0.72rem] tracking-[0.08em] text-ink-faint">
+          a room, listening
+        </figcaption>
+      </figure>
+      <p class="kicker reveal mt-12">Possible formats include</p>
+      <ul class="font-reading mt-4 max-w-2xl text-lg">
+        {
+          formats.map((f, i) => (
+            <li
+              class="reveal border-b border-line py-3 text-ink last:border-b-0"
+              style={`transition-delay:${i * 60}ms`}
             >
-              <Image
-                src={b.img}
-                alt={b.imgAlt}
-                class="aspect-[3/2] w-full object-cover mix-blend-multiply"
-                widths={[640, 960, 1280, 1600]}
-                sizes="(min-width: 68rem) 43rem, (min-width: 640px) 66vw, calc(100vw - 3rem)"
-              />
-              <figcaption class="mt-3 font-mono text-[0.72rem] tracking-[0.08em] text-ink-faint">
-                {b.imgCaption}
-              </figcaption>
-            </figure>
-            {b.extra && (
-              <figure class="reveal sm:mt-14">
-                <Image
-                  src={b.extra}
-                  alt={b.extraAlt}
-                  class="aspect-square w-full object-cover mix-blend-multiply"
-                  widths={[400, 640, 960]}
-                  sizes="(min-width: 68rem) 21rem, (min-width: 640px) 33vw, calc(100vw - 3rem)"
-                />
-                <figcaption class="mt-3 font-mono text-[0.72rem] tracking-[0.08em] text-ink-faint">
-                  {b.extraCaption}
-                </figcaption>
-              </figure>
-            )}
-          </div>
-          <a href="/enquire" class="btn reveal mt-10">
-            {b.cta}
-          </a>
+              {f}
+            </li>
+          ))
+        }
+      </ul>
+      <p class="font-display text-title reveal mt-10 max-w-2xl italic">
+        Every exchange is different because every participant is different.
+      </p>
+    </div>
+  </section>
+
+  <section class="border-t border-line">
+    <div class="mx-auto max-w-[68rem] px-6 py-16">
+      <h2 class="font-display text-display reveal text-ink">Poetry performances</h2>
+      <p class="font-reading reveal mt-5 max-w-2xl text-lg text-ink-soft">
+        Commissioned performances, readings and spoken-word interventions
+        created for openings, dinners, festivals, launches and cultural
+        programmes.
+      </p>
+    </div>
+  </section>
+
+  <section class="border-t border-line">
+    <div class="mx-auto max-w-[68rem] px-6 py-16">
+      <h2 class="font-display text-display reveal text-ink">Poetic hosting</h2>
+      <p class="font-reading reveal mt-5 max-w-2xl text-lg text-ink-soft">
+        Poets, writers and skilled moderators who can welcome an audience,
+        introduce an occasion or guide a conversation with warmth and
+        originality.
+      </p>
+    </div>
+  </section>
+
+  <section class="border-t border-line">
+    <div class="mx-auto max-w-[68rem] px-6 py-16">
+      <div class="grid items-start gap-8 lg:grid-cols-12 lg:gap-10">
+        <div class="lg:col-span-7">
+          <h2 class="font-display text-display reveal text-ink">Poetry that remains</h2>
+          <p class="font-reading reveal mt-5 max-w-xl text-lg text-ink-soft">
+            Some experiences leave a physical trace: a poem, publication,
+            printed work, edition or object. The form follows the project
+            rather than defining it.
+          </p>
+          <a href="/enquire" class="btn reveal mt-10">Plan a live experience</a>
         </div>
-      </section>
-    ))
-  }
+        <figure class="reveal lg:col-span-4 lg:col-start-9">
+          <Image
+            src={printedMatter}
+            alt="Poetry posters and thin publications hanging from clips in a design studio"
+            class="aspect-square w-full object-cover mix-blend-multiply"
+            widths={[400, 640, 960]}
+            sizes="(min-width: 1024px) 21rem, calc(100vw - 3rem)"
+          />
+          <figcaption class="mt-3 font-mono text-[0.72rem] tracking-[0.08em] text-ink-faint">
+            editions, hanging
+          </figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
 
   <section class="border-t border-line bg-paper-deep">
     <div class="mx-auto max-w-[68rem] px-6 py-16">

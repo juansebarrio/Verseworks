@@ -184,7 +184,7 @@ a:focus-visible {
   min-width: 5.2em;
 }
 
-.lang-swap [lang='ar'] {
+.lang-swap[lang='ar'] {
   font-family: var(--font-arabic);
 }
 

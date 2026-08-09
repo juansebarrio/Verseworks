@@ -14,6 +14,8 @@ interface Props {
 const { title, description } = Astro.props;
 const nav = [
   { href: '/experiences', label: 'Experiences' },
+  { href: '/programmes', label: 'Programmes' },
+  { href: '/commissions', label: 'Commissions' },
   { href: '/about', label: 'About' },
 ];
 const path = Astro.url.pathname;
@@ -51,7 +53,7 @@ const path = Astro.url.pathname;
                 href={item.href}
                 aria-current={path.startsWith(item.href) ? 'page' : undefined}
                 class:list={[
-                  'hidden font-sans text-[0.85rem] text-ink-soft transition-colors hover:text-ink sm:inline',
+                  'hidden font-sans text-[0.85rem] text-ink-soft transition-colors hover:text-ink md:inline',
                   path.startsWith(item.href) && 'text-ink underline underline-offset-4',
                 ]}
               >
@@ -61,11 +63,44 @@ const path = Astro.url.pathname;
           }
           <a
             href="/enquire"
+            aria-current={path.startsWith('/enquire') ? 'page' : undefined}
             class="font-mono text-[0.72rem] tracking-[0.16em] uppercase text-ink underline decoration-line underline-offset-4 transition-colors hover:decoration-ink"
             >Enquire</a
           >
+          <button
+            id="nav-toggle"
+            type="button"
+            aria-expanded="false"
+            aria-controls="nav-mobile"
+            class="-my-1 flex flex-col justify-center gap-[5px] self-center py-2 pl-2 md:hidden"
+          >
+            <span class="sr-only">Menu</span>
+            <span class="block h-px w-5 bg-ink transition-transform"></span>
+            <span class="block h-px w-5 bg-ink transition-opacity"></span>
+            <span class="block h-px w-5 bg-ink transition-transform"></span>
+          </button>
         </nav>
       </div>
+      <nav id="nav-mobile" hidden class="border-t border-line md:hidden" aria-label="Main, mobile">
+        <ul class="mx-auto max-w-[68rem] px-6 py-2">
+          {
+            [...nav, { href: '/enquire', label: 'Enquire' }].map((item) => (
+              <li class="border-b border-line last:border-b-0">
+                <a
+                  href={item.href}
+                  aria-current={path.startsWith(item.href) ? 'page' : undefined}
+                  class:list={[
+                    'block py-3 font-sans text-[0.95rem] text-ink-soft transition-colors hover:text-ink',
+                    path.startsWith(item.href) && 'text-ink underline underline-offset-4',
+                  ]}
+                >
+                  {item.label}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </nav>
     </header>
 
     <main><slot /></main>
@@ -78,6 +113,8 @@ const path = Astro.url.pathname;
         >
           <div class="flex flex-col gap-1 text-[0.85rem] text-ink-soft">
             <a href="/experiences" class="w-fit hover:text-ink">Experiences</a>
+            <a href="/programmes" class="w-fit hover:text-ink">Programmes</a>
+            <a href="/commissions" class="w-fit hover:text-ink">Commissions</a>
             <a href="/hotels-and-brands" class="w-fit hover:text-ink"
               >For hotels and brands</a
             >
@@ -85,8 +122,9 @@ const path = Astro.url.pathname;
             <a href="/enquire" class="w-fit hover:text-ink">Enquire</a>
           </div>
           <div class="font-mono text-[0.75rem] leading-relaxed text-ink-faint">
-            <p>hello@verseworks.example <span class="text-line">·</span> TODO: email real</p>
-            <p>Based in [LOCATION] — available internationally.</p>
+            {/* TODO: reemplazar por el email real cuando exista */}
+            <p><a href="mailto:hello@verseworks.example" class="hover:text-ink">hello@verseworks.example</a></p>
+            <p>Available for projects internationally.</p>
           </div>
         </div>
         <p class="kicker mt-10">© {new Date().getFullYear()} Verseworks</p>
@@ -94,6 +132,17 @@ const path = Astro.url.pathname;
     </footer>
 
     <script>
+      // Menú mobile: toggle mínimo con aria-expanded
+      const toggle = document.getElementById('nav-toggle');
+      const mobileNav = document.getElementById('nav-mobile');
+      if (toggle && mobileNav) {
+        toggle.addEventListener('click', () => {
+          const open = toggle.getAttribute('aria-expanded') === 'true';
+          toggle.setAttribute('aria-expanded', String(!open));
+          mobileNav.hidden = open;
+        });
+      }
+
       const io = new IntersectionObserver(
         (entries) => {
           for (const e of entries) {

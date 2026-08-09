@@ -14,9 +14,9 @@ const heroWords = ['This', 'is', 'a', 'poem.'];
 const services = [
   {
     title: 'Live Experiences',
-    body: 'Personal poems written for guests in real time, alongside performances, poetic interventions and tangible keepsakes.',
+    body: 'Performances, poetic interventions and live encounters that bring poetry directly into a gathering — from individual exchanges to experiences unfolding across an entire event.',
     cta: 'Explore live experiences',
-    href: '/experiences#live',
+    href: '/experiences',
     img: performanceCrowd,
     imgAlt: 'A poet performing surrounded by a standing audience in a contemporary venue',
     caption: 'fig. 01 — a poem, performed',
@@ -26,7 +26,7 @@ const services = [
     title: 'Participatory Programmes',
     body: 'Workshops, public programmes and community projects that invite people to write, speak, listen and create together.',
     cta: 'Explore programmes',
-    href: '/experiences#programmes',
+    href: '/programmes',
     img: workshopTable,
     imgAlt: 'A group talking and writing together around a large table during a workshop',
     caption: 'fig. 02 — a collective draft',
@@ -34,9 +34,9 @@ const services = [
   },
   {
     title: 'Creative Commissions',
-    body: 'Original texts, installations, public art and bespoke poetic concepts developed in response to a place, event, audience or idea.',
+    body: 'Poetry as installation, intervention and public artwork. We develop original concepts in response to architecture, place, audiences and ideas — from projected and printed text to multilingual works, performances and participatory installations.',
     cta: 'Explore commissions',
-    href: '/experiences#commissions',
+    href: '/commissions',
     img: installationSquare,
     imgAlt: 'People walking between large text installations in a public square',
     caption: 'fig. 03 — verses, in public',
@@ -45,14 +45,14 @@ const services = [
 ];
 
 const places = [
-  'In the lobby of a hotel.',
-  'At a literary festival.',
-  'Around a dinner table.',
-  'Inside a museum.',
-  'Across the walls of a city.',
-  'At a product launch.',
-  'Within an immersive performance.',
-  'In the hands of every guest as they leave.',
+  'Museum.',
+  'Festival.',
+  'Hotel.',
+  'Dinner.',
+  'Public square.',
+  'Launch.',
+  'Performance.',
+  'City wall.',
 ];
 
 const audiences = [
@@ -67,7 +67,7 @@ const audiences = [
   },
   {
     title: 'Brands and creative agencies',
-    body: 'Human, thoughtful activations for launches, campaigns, retail environments and client events.',
+    body: 'Participatory poetry experiences for launches, campaigns, retail environments and client events — designed around the audience, place and idea rather than a fixed activation format.',
     href: '/hotels-and-brands',
   },
   {
@@ -90,17 +90,17 @@ const margins = [
 
 <Base
   title="Verseworks — This is a poem."
-  description="Verseworks is a multilingual poetry studio creating live, participatory experiences for festivals, cultural institutions, immersive events, hotels and brands."
+  description="Verseworks is a multilingual poetry studio creating participatory experiences, performances, installations and commissions for festivals, cultural institutions, public spaces, hospitality and brands."
 >
   <!-- 1 · Intriga: tipografía sola sobre papel -->
   <section class="mx-auto max-w-[68rem] px-6 pt-[14vh] pb-[12vh]">
-    <h1 class="font-display text-hero text-ink">
+    <h1 class="font-display text-hero italic text-ink">
       {
         heroWords.map((w, i) => (
           <Fragment>
             {/* El espacio vive FUERA del span: dentro de un inline-block se colapsa */}
             <span
-              class:list={['hero-word', i === heroWords.length - 1 && 'cursor italic']}
+              class:list={['hero-word', i === heroWords.length - 1 && 'cursor']}
               style={`animation-delay:${(0.15 + i * 0.34).toFixed(2)}s`}
             >{w}</span>
             {i < heroWords.length - 1 && ' '}
@@ -109,14 +109,14 @@ const margins = [
       }
     </h1>
     <p class="font-reading mt-8 max-w-xl text-lg text-ink-soft">
-      Live words for memorable gatherings.
+      Poetry, made live.
     </p>
     <p class="mt-6 max-w-xl text-[0.98rem] leading-relaxed text-ink-soft">
-      Verseworks is a multilingual poetry studio creating live, participatory
-      experiences for festivals, cultural institutions, immersive events, hotels
-      and brands.
+      Verseworks is a multilingual poetry studio creating participatory
+      experiences, performances, installations and commissions for festivals,
+      cultural institutions, public spaces, hospitality and brands.
     </p>
-    <a href="/enquire" class="btn mt-10">Plan a poetry experience</a>
+    <a href="/enquire" class="btn mt-10">Work with us</a>
   </section>
 
   <!-- 2 · Explicación: pliego de libro — texto a la izquierda, foto sangrada -->
@@ -124,21 +124,18 @@ const margins = [
     <p class="marginalia reveal mt-16 px-6 lg:px-0">{margins[0]}<br />{margins[1]}</p>
     <div class="grid lg:grid-cols-2">
       <div class="px-6 py-16 lg:gutter-l lg:py-24 lg:pr-16">
-        <p class="kicker reveal">Poetry, happening here</p>
-        <div class="font-reading mt-8 max-w-xl space-y-5 text-xl text-ink">
-          <p class="reveal">A guest offers a memory, a feeling, a place or a few words.</p>
-          <p class="reveal pl-[1.5em]">A poet listens.</p>
-          <p class="reveal">
-            Minutes later, something new exists: an original poem, written for
-            that person in that moment.
-          </p>
-        </div>
+        <h2 class="kicker reveal">Poetry, happening here</h2>
         <p class="reveal mt-8 max-w-xl leading-relaxed text-ink-soft">
-          It might be typed, handwritten, printed, projected or spoken aloud. It
-          might be created in English, Arabic, French, Spanish or another language
-          chosen for the audience. The poem becomes an encounter and part of the
-          bigger story.
+          Verseworks creates situations in which people encounter poetry by
+          making it, speaking it, hearing it or becoming part of it.
         </p>
+        <div class="font-reading mt-10 max-w-xl space-y-4 text-xl text-ink">
+          <p class="reveal">A poem might begin with a conversation between two people.</p>
+          <p class="reveal pl-[1.5em]">It might emerge collectively across a festival.</p>
+          <p class="reveal">It might be performed, projected onto a building,</p>
+          <p class="reveal pl-[1.5em]">written across a wall,</p>
+          <p class="reveal pl-[3em]">whispered into headphones or carried home in someone's pocket.</p>
+        </div>
         <p class="font-display text-title reveal mt-12 italic">
           We turn audiences from spectators into participants.
         </p>
@@ -227,16 +224,16 @@ const margins = [
     <p class="marginalia marginalia--paper reveal mt-16 px-6 lg:px-0">{margins[3]}</p>
     <div class="mx-auto max-w-[68rem] px-6 pt-16 lg:pt-24">
       <h2 class="font-display text-display reveal max-w-3xl">
-        One poet. One typewriter. An entire room transformed.
+        Give us a room. We'll find the poem in it.
       </h2>
-      <p class="reveal mt-6 text-paper/70">Verseworks can appear almost anywhere.</p>
-      <ul class="font-reading mt-10 max-w-2xl text-xl">
+      <p class="reveal mt-6 max-w-2xl text-paper/70">
+        Verseworks can appear almost anywhere: a museum, festival, hotel, dinner,
+        public square, launch, performance or city wall.
+      </p>
+      <ul class="font-display mt-12 flex max-w-4xl flex-wrap gap-x-[0.55em] gap-y-3 text-display">
         {
           places.map((p, i) => (
-            <li
-              class="reveal border-b border-paper/15 py-3 last:border-b-0"
-              style={`transition-delay:${i * 60}ms`}
-            >
+            <li class="reveal" style={`transition-delay:${i * 90}ms`}>
               {p}
             </li>
           ))
@@ -260,7 +257,7 @@ const margins = [
   <!-- 5 · Audiencias -->
   <section class="relative border-t border-line bg-paper-deep">
     <div class="mx-auto max-w-[68rem] px-6 py-16 lg:py-24">
-      <p class="kicker reveal">For gatherings of every kind</p>
+      <h2 class="kicker reveal">For gatherings of every kind</h2>
       <div class="mt-10 grid gap-x-14 gap-y-12 sm:grid-cols-2">
         {
           audiences.map((a) => (
@@ -316,11 +313,11 @@ const margins = [
   <section class="relative border-t border-line">
     <p class="marginalia reveal mt-16 px-6 lg:px-0">{margins[5]}</p>
     <div class="mx-auto max-w-[68rem] px-6 py-16 lg:py-24">
-      <p class="kicker reveal">A poem belongs here</p>
+      <h2 class="kicker reveal">A poem belongs here</h2>
       <p class="font-reading reveal mt-8 max-w-2xl text-lg leading-relaxed text-ink">
-        Every project begins with its setting. We do not place the same
-        activation into every room. We consider who will be there, how they will
-        encounter the work and what they might carry away from it.
+        Every project begins with its setting. We do not place the same format
+        into every room. We consider who will be there, how they will encounter
+        the work and what form the poetry should take.
       </p>
       <p class="reveal mt-6 max-w-2xl leading-relaxed text-ink-soft">
         From one poet at an intimate gathering to a multilingual programme
