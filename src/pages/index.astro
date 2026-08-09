@@ -1,13 +1,13 @@
 ---
 import { Image } from 'astro:assets';
 import Base from '../layouts/Base.astro';
-import photo1 from '../assets/photos/1.jpg';
-import photo4 from '../assets/photos/4.jpg';
-import photo5crop from '../assets/photos/5-crop.jpg';
-import photo6 from '../assets/photos/6.jpg';
-import photo8 from '../assets/photos/8.jpg';
-import photo9 from '../assets/photos/9.jpg';
-import photo10 from '../assets/photos/10.jpg';
+import calligraphyStroke from '../assets/photos/calligraphy-stroke.jpg';
+import collectiveWall from '../assets/photos/collective-wall.jpg';
+import exchangeIntimate from '../assets/photos/exchange-intimate.jpg';
+import installationSquare from '../assets/photos/installation-square.jpg';
+import performanceCrowd from '../assets/photos/performance-crowd.jpg';
+import projectionFacade from '../assets/photos/projection-facade.jpg';
+import workshopTable from '../assets/photos/workshop-table.jpg';
 
 const heroWords = ['This', 'is', 'a', 'poem.'];
 
@@ -17,9 +17,9 @@ const services = [
     body: 'Personal poems written for guests in real time, alongside performances, poetic interventions and tangible keepsakes.',
     cta: 'Explore live experiences',
     href: '/experiences#live',
-    img: photo4,
-    imgAlt: 'Two hands exchanging a small cream card across a candlelit dinner table',
-    caption: 'fig. 01 — a poem changes hands',
+    img: performanceCrowd,
+    imgAlt: 'A poet performing surrounded by a standing audience in a contemporary venue',
+    caption: 'fig. 01 — a poem, performed',
     verse: 'listen.',
   },
   {
@@ -27,8 +27,8 @@ const services = [
     body: 'Workshops, public programmes and community projects that invite people to write, speak, listen and create together.',
     cta: 'Explore programmes',
     href: '/experiences#programmes',
-    img: photo8,
-    imgAlt: 'Hands writing on paper cards around a shared wooden workshop table, seen from above',
+    img: workshopTable,
+    imgAlt: 'A group talking and writing together around a large table during a workshop',
     caption: 'fig. 02 — a collective draft',
     verse: 'write.',
   },
@@ -37,9 +37,9 @@ const services = [
     body: 'Original texts, installations, public art and bespoke poetic concepts developed in response to a place, event, audience or idea.',
     cta: 'Explore commissions',
     href: '/experiences#commissions',
-    img: photo6,
-    imgAlt: 'Cream paper cards pinned in a constellation on a gallery wall as a visitor reads one',
-    caption: 'fig. 03 — verses, pinned',
+    img: installationSquare,
+    imgAlt: 'People walking between large text installations in a public square',
+    caption: 'fig. 03 — verses, in public',
     verse: 'keep.',
   },
 ];
@@ -92,47 +92,31 @@ const margins = [
   title="Verseworks — This is a poem."
   description="Verseworks is a multilingual poetry studio creating live, participatory experiences for festivals, cultural institutions, immersive events, hotels and brands."
 >
-  <!-- 1 · Intriga: portada de libro sobre la esquina del hotel -->
-  <section class="relative flex min-h-[92vh] flex-col justify-end overflow-hidden bg-ink text-paper">
-    <Image
-      src={photo9}
-      alt=""
-      class="absolute inset-0 h-full w-full scale-105 object-cover"
-      widths={[768, 1088, 1600, 2048]}
-      sizes="100vw"
-      loading="eager"
-      fetchpriority="high"
-    />
-    <div class="absolute inset-0 bg-linear-to-t from-ink/90 via-ink/35 to-ink/20"></div>
-    <div class="relative mx-auto w-full max-w-[68rem] px-6 pt-[24vh] pb-[10vh]">
-      <h1 class="font-display text-hero">
-        {
-          heroWords.map((w, i) => (
-            <Fragment>
-              {/* El espacio vive FUERA del span: dentro de un inline-block se colapsa */}
-              <span
-                class:list={['hero-word', i === heroWords.length - 1 && 'cursor italic']}
-                style={`animation-delay:${(0.15 + i * 0.34).toFixed(2)}s`}
-              >{w}</span>
-              {i < heroWords.length - 1 && ' '}
-            </Fragment>
-          ))
-        }
-      </h1>
-      <p class="font-reading mt-8 max-w-xl text-lg text-paper/85">
-        Live words for memorable gatherings.
-      </p>
-      <p class="mt-6 max-w-xl text-[0.98rem] leading-relaxed text-paper/70">
-        Verseworks is a multilingual poetry studio creating live, participatory
-        experiences for festivals, cultural institutions, immersive events, hotels
-        and brands.
-      </p>
-      <a
-        href="/enquire"
-        class="btn mt-10 border-paper text-paper hover:bg-paper hover:text-ink"
-        >Plan a poetry experience</a
-      >
-    </div>
+  <!-- 1 · Intriga: tipografía sola sobre papel -->
+  <section class="mx-auto max-w-[68rem] px-6 pt-[14vh] pb-[12vh]">
+    <h1 class="font-display text-hero text-ink">
+      {
+        heroWords.map((w, i) => (
+          <Fragment>
+            {/* El espacio vive FUERA del span: dentro de un inline-block se colapsa */}
+            <span
+              class:list={['hero-word', i === heroWords.length - 1 && 'cursor italic']}
+              style={`animation-delay:${(0.15 + i * 0.34).toFixed(2)}s`}
+            >{w}</span>
+            {i < heroWords.length - 1 && ' '}
+          </Fragment>
+        ))
+      }
+    </h1>
+    <p class="font-reading mt-8 max-w-xl text-lg text-ink-soft">
+      Live words for memorable gatherings.
+    </p>
+    <p class="mt-6 max-w-xl text-[0.98rem] leading-relaxed text-ink-soft">
+      Verseworks is a multilingual poetry studio creating live, participatory
+      experiences for festivals, cultural institutions, immersive events, hotels
+      and brands.
+    </p>
+    <a href="/enquire" class="btn mt-10">Plan a poetry experience</a>
   </section>
 
   <!-- 2 · Explicación: pliego de libro — texto a la izquierda, foto sangrada -->
@@ -161,11 +145,13 @@ const margins = [
       </div>
       <figure class="reveal border-t border-line lg:border-t-0 lg:border-l">
         <Image
-          src={photo1}
-          alt="A poet listening closely to a guest across a table with a mint green typewriter between them"
+          src={projectionFacade}
+          alt="Lines of projected text sweeping across a building facade at night as people watch from below"
           class="h-72 w-full object-cover sm:h-96 lg:h-full"
           widths={[640, 960, 1280, 1920]}
           sizes="(min-width: 1024px) 50vw, 100vw"
+          loading="eager"
+          fetchpriority="high"
         />
       </figure>
     </div>
@@ -262,8 +248,8 @@ const margins = [
     </div>
     <figure class="reveal">
       <Image
-        src={photo10}
-        alt="A long candlelit dinner table with a small card resting at each place setting"
+        src={collectiveWall}
+        alt="Many people writing at the same time on a large wall covered in collective text"
         class="aspect-[16/9] w-full object-cover sm:aspect-[21/9]"
         widths={[768, 1088, 1600, 2048]}
         sizes="100vw"
@@ -314,6 +300,15 @@ const margins = [
         One event may unfold in one language or many. The poem still begins in
         the same place: with someone listening.
       </p>
+      <figure class="reveal mt-12 max-w-2xl">
+        <Image
+          src={calligraphyStroke}
+          alt="A calligrapher making one large gestural brushstroke of ink across paper on the floor"
+          class="aspect-[3/2] w-full object-cover mix-blend-multiply"
+          widths={[640, 960, 1280]}
+          sizes="(min-width: 768px) 42rem, calc(100vw - 3rem)"
+        />
+      </figure>
     </div>
   </section>
 
@@ -332,11 +327,11 @@ const margins = [
         across an entire festival, Verseworks can shape the concept, select the
         artists and support the experience from beginning to end.
       </p>
-      {/* La foto nocturna cruza el borde hacia el bloque de tinta */}
+      {/* La foto cruza el borde hacia el bloque de tinta */}
       <figure class="reveal relative z-10 mt-12 ml-auto w-64 -mb-20 sm:w-80 sm:-mb-24">
         <Image
-          src={photo5crop}
-          alt="A guest reading a small card under warm string lights at an evening gathering"
+          src={exchangeIntimate}
+          alt="A poet writing in a notebook while listening closely to a participant in a bright room"
           class="aspect-[4/5] w-full object-cover"
           widths={[480, 800, 1120]}
           sizes="20rem"

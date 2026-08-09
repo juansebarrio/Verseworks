@@ -1,8 +1,9 @@
 ---
 import { Image } from 'astro:assets';
 import Base from '../layouts/Base.astro';
-import photo9 from '../assets/photos/9.jpg';
-import photo10 from '../assets/photos/10.jpg';
+import hotelReading from '../assets/photos/hotel-reading.jpg';
+import listeningGallery from '../assets/photos/listening-gallery.jpg';
+import typewriterLobby from '../assets/photos/typewriter-lobby.jpg';
 // TODO: volcar el copy completo de FOR HOTELS AND BRANDS.
 // Página fuera de la nav principal: se linkea desde la Home y se usa
 // como URL directa en outreach comercial.
@@ -25,20 +26,34 @@ import photo10 from '../assets/photos/10.jpg';
     <a href="/enquire" class="btn mt-10">Create an experience</a>
   </section>
 
-  <figure class="reveal overflow-hidden border-t border-line">
+  <figure class="reveal border-t border-line">
     <Image
-      src={photo9}
-      alt="A quiet hotel corner with a green typewriter on a wooden desk between two armchairs under a warm lamp"
-      class="aspect-[3/2] w-full scale-105 object-cover sm:aspect-[2/1]"
+      src={hotelReading}
+      alt="A poet reading aloud to a small group of guests in a modern hotel lobby"
+      class="aspect-[3/2] w-full object-cover sm:aspect-[2/1]"
       widths={[768, 1088, 1600, 2048]}
       sizes="100vw"
     />
   </figure>
 
+  <section class="border-t border-line bg-paper-deep">
+    <div class="mx-auto max-w-[68rem] px-6 py-16 lg:py-24">
+      <figure class="reveal max-w-2xl">
+        <Image
+          src={typewriterLobby}
+          alt="A quiet hotel corner with a green typewriter on a wooden desk between two armchairs"
+          class="aspect-[4/3] w-full object-cover"
+          widths={[640, 960, 1280]}
+          sizes="(min-width: 768px) 42rem, calc(100vw - 3rem)"
+        />
+      </figure>
+    </div>
+  </section>
+
   <figure class="reveal border-t border-line">
     <Image
-      src={photo10}
-      alt="A long candlelit dinner table with a small card resting at each place setting"
+      src={listeningGallery}
+      alt="A visitor with headphones listening to a poem in a white gallery space"
       class="aspect-[16/9] w-full object-cover sm:aspect-[21/9]"
       widths={[768, 1088, 1600, 2048]}
       sizes="100vw"

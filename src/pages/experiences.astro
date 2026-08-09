@@ -1,10 +1,10 @@
 ---
 import { Image } from 'astro:assets';
 import Base from '../layouts/Base.astro';
-import photo2 from '../assets/photos/2.jpg';
-import photo6 from '../assets/photos/6.jpg';
-import photo7 from '../assets/photos/7.jpg';
-import photo8 from '../assets/photos/8.jpg';
+import installationSquare from '../assets/photos/installation-square.jpg';
+import performanceCrowd from '../assets/photos/performance-crowd.jpg';
+import printedMatter from '../assets/photos/printed-matter.jpg';
+import workshopTable from '../assets/photos/workshop-table.jpg';
 
 // TODO: volcar el copy completo de EXPERIENCES (ya redactado en el brief).
 const blocks = [
@@ -13,20 +13,20 @@ const blocks = [
     title: 'Live Experiences',
     lead: 'Poems made on the spot, performances, poetic hosting and poems to take home.',
     cta: 'Plan a live experience',
-    img: photo2,
-    imgAlt: 'A hand writing a poem with a fountain pen on a small cream card',
-    imgCaption: 'ink, still wet',
-    extra: photo7,
-    extraAlt: 'A stack of blank cream cards tied with string beside a brass object',
-    extraCaption: 'cards, waiting',
+    img: performanceCrowd,
+    imgAlt: 'A poet performing surrounded by a standing audience in a contemporary venue',
+    imgCaption: 'a room, listening',
+    extra: printedMatter,
+    extraAlt: 'Poetry posters and thin publications hanging from clips in a design studio',
+    extraCaption: 'editions, hanging',
   },
   {
     id: 'programmes',
     title: 'Participatory Programmes',
     lead: 'Workshops, collective poems and community projects — no previous writing experience required.',
     cta: 'Create a participatory programme',
-    img: photo8,
-    imgAlt: 'Hands writing on paper cards around a shared wooden workshop table, seen from above',
+    img: workshopTable,
+    imgAlt: 'A group talking and writing together around a large table during a workshop',
     imgCaption: 'the table, mid-poem',
   },
   {
@@ -34,9 +34,9 @@ const blocks = [
     title: 'Creative Commissions',
     lead: 'Poetry in public space, bespoke texts, installations, publications and editions.',
     cta: 'Commission a poem',
-    img: photo6,
-    imgAlt: 'Cream paper cards pinned in a constellation on a gallery wall as a visitor reads one',
-    imgCaption: 'a wall of verses',
+    img: installationSquare,
+    imgAlt: 'People walking between large text installations in a public square',
+    imgCaption: 'verses, in the square',
   },
 ];
 ---
