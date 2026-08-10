@@ -1,6 +1,9 @@
 ---
 import '../styles/global.css';
-import '@fontsource-variable/literata';
+// Variante "standard": incluye los ejes wght + opsz (el CSS del sitio usa
+// font-variation-settings 'opsz'), y la itálica real de Literata.
+import '@fontsource-variable/literata/standard.css';
+import '@fontsource-variable/literata/standard-italic.css';
 import '@fontsource-variable/hanken-grotesk';
 import '@fontsource/courier-prime';
 import '@fontsource/courier-prime/400-italic.css';
@@ -35,8 +38,18 @@ const path = Astro.url.pathname;
     <meta property="og:image" content="/og.png" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="generator" content={Astro.generator} />
+    <script is:inline>
+      // Marca la presencia de JS: los estados ocultos de .reveal solo aplican
+      // bajo .js, así el contenido es visible aunque el script no corra.
+      document.documentElement.classList.add('js');
+    </script>
   </head>
   <body>
+    <a
+      href="#main"
+      class="sr-only focus:not-sr-only focus:absolute focus:top-3 focus:left-6 focus:z-50 focus:border focus:border-ink focus:bg-paper focus:px-4 focus:py-2 focus:font-mono focus:text-[0.78rem] focus:tracking-[0.16em] focus:uppercase"
+      >Skip to content</a
+    >
     <header class="border-b border-line">
       <div
         class="mx-auto flex max-w-[68rem] items-baseline justify-between gap-6 px-6 py-5"
@@ -103,7 +116,7 @@ const path = Astro.url.pathname;
       </nav>
     </header>
 
-    <main><slot /></main>
+    <main id="main"><slot /></main>
 
     <footer class="border-t border-line bg-paper-deep">
       <div class="mx-auto max-w-[68rem] px-6 py-14">
@@ -140,6 +153,13 @@ const path = Astro.url.pathname;
           const open = toggle.getAttribute('aria-expanded') === 'true';
           toggle.setAttribute('aria-expanded', String(!open));
           mobileNav.hidden = open;
+        });
+        document.addEventListener('keydown', (e) => {
+          if (e.key === 'Escape' && toggle.getAttribute('aria-expanded') === 'true') {
+            toggle.setAttribute('aria-expanded', 'false');
+            mobileNav.hidden = true;
+            toggle.focus();
+          }
         });
       }
 
