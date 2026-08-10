@@ -11,9 +11,12 @@
 import { config, collection, fields, singleton } from '@keystatic/core';
 
 export default config({
-  storage: { kind: 'local' },
-  // storage: { kind: 'cloud' },
-  // cloud: { project: 'EQUIPO/PROYECTO' }, // ← id del proyecto de keystatic.cloud
+  // Keystatic Cloud activo: la clienta edita desde /keystatic logueando con
+  // su email (los guardados se convierten en commits al repo).
+  // Para volver a modo local (solo dev): storage: { kind: 'local' } y
+  // comentar el bloque cloud.
+  storage: { kind: 'cloud' },
+  cloud: { project: 'verseworks/verseworks' },
 
   ui: {
     brandName: 'Verseworks',
