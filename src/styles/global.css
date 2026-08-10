@@ -85,8 +85,10 @@ body {
   }
 }
 
-/* Reveal on scroll (IntersectionObserver agrega .is-in) */
-.reveal {
+/* Reveal on scroll (IntersectionObserver agrega .is-in).
+   El estado oculto solo existe si hay JS (html.js): sin script,
+   todo el contenido queda visible. */
+.js .reveal {
   opacity: 0;
   transform: translateY(14px);
   transition:
@@ -94,7 +96,7 @@ body {
     transform 0.7s ease;
 }
 
-.reveal.is-in {
+.js .reveal.is-in {
   opacity: 1;
   transform: none;
 }
@@ -198,7 +200,7 @@ a:focus-visible {
     animation: none;
     opacity: 1;
   }
-  .reveal {
+  .js .reveal {
     opacity: 1;
     transform: none;
     transition: none;
