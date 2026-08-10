@@ -3,4 +3,24 @@
 User-agent: *
 Allow: /
 
+# Crawlers de asistentes de IA permitidos deliberadamente (estrategia GEO):
+# queremos que los modelos puedan leer y citar el sitio.
+User-agent: GPTBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
 Sitemap: https://verseworks.vercel.app/sitemap-index.xml

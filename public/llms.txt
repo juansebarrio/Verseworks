@@ -1,0 +1,15 @@
+# Verseworks
+
+> Verseworks is a multilingual poetry studio creating participatory experiences, performances, installations and commissions for festivals, cultural institutions, public spaces, hospitality and brands.
+
+Verseworks works with poets, writers, performers, artists and designers to bring language into public and shared spaces, in one language or many (English, Arabic, French, Spanish among them). Available for projects internationally.
+
+## Pages
+
+- [Home](https://verseworks.vercel.app/): This is a poem. — the studio, what it creates and who it works with.
+- [Live Experiences](https://verseworks.vercel.app/experiences/): Poems made live, poetry performances, poetic hosting and poetry that remains.
+- [Participatory Programmes](https://verseworks.vercel.app/programmes/): Poetry workshops, collective poems and community projects that invite people to write, speak, listen and create together.
+- [Creative Commissions](https://verseworks.vercel.app/commissions/): Poetry as installation, intervention and public artwork — bespoke texts, installations, publications and editions.
+- [For hotels and brands](https://verseworks.vercel.app/hotels-and-brands/): Live, multilingual poetry experiences for hotels, hospitality spaces and brands, shaped around the host.
+- [About](https://verseworks.vercel.app/about/): The studio, its approach, the people behind the poems and founder Wided Rihana Khadraoui.
+- [Enquire](https://verseworks.vercel.app/enquire/): What are you gathering people for? — start a conversation with the studio.
