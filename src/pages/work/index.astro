@@ -1,0 +1,90 @@
+---
+// NOT LINKED YET — pending client content and approval.
+// Listado de case studies (colección Keystatic). Accesible solo por URL:
+// no está en la nav ni en el footer hasta que la clienta cargue y apruebe
+// los primeros proyectos.
+import { Image } from 'astro:assets';
+import Base from '../../layouts/Base.astro';
+import { reader } from '../../lib/keystatic';
+
+const all = await reader.collections.caseStudies.all();
+const published = all
+  .filter((entry) => entry.entry.published)
+  .sort((a, b) => (b.entry.year ?? '').localeCompare(a.entry.year ?? ''));
+
+// Las imágenes viven en src/assets/cases y se sirven vía astro:assets,
+// como el resto del sitio: se resuelven contra el path guardado por Keystatic.
+const caseImages = import.meta.glob<{ default: ImageMetadata }>(
+  '/src/assets/cases/**/*.{jpg,jpeg,png,webp,avif}',
+);
+
+async function resolveImage(path: string | null) {
+  if (!path) return null;
+  const load = caseImages[path];
+  if (!load) throw new Error(`Imagen de case study no encontrada: ${path}`);
+  return (await load()).default;
+}
+---
+
+<Base
+  title="Work"
+  description="Selected projects: live poetry experiences, participatory programmes and commissions created for festivals, hotels, brands and public spaces."
+>
+  <section class="mx-auto max-w-[68rem] px-6 pt-[10vh] pb-16">
+    <h1 class="font-display text-hero max-w-4xl text-ink">Work</h1>
+    <p class="mt-8 max-w-xl leading-relaxed text-ink-soft">
+      Selected projects across live experiences, participatory programmes and
+      commissions.
+    </p>
+  </section>
+
+  <section class="border-t border-line">
+    <div class="mx-auto max-w-[68rem] px-6 py-16">
+      {
+        published.length === 0 ? (
+          <div class="max-w-xl">
+            <p class="kicker reveal">Coming soon</p>
+            <p class="font-display text-title reveal mt-6 italic text-ink">
+              The first projects are being written.
+            </p>
+            <p class="reveal mt-6 leading-relaxed text-ink-soft">
+              Case studies will appear here as they are published.
+            </p>
+          </div>
+        ) : (
+          <ul class="grid gap-x-10 gap-y-16 sm:grid-cols-2">
+            {await Promise.all(
+              published.map(async (entry, i) => {
+                const cover = await resolveImage(entry.entry.cover);
+                return (
+                  <li class="reveal" style={`transition-delay:${(i % 2) * 90}ms`}>
+                    <a href={`/work/${entry.slug}/`} class="group block">
+                      {cover && (
+                        <figure class="overflow-hidden">
+                          <Image
+                            src={cover}
+                            alt={entry.entry.title}
+                            class="aspect-[4/3] w-full object-cover transition-transform duration-500 group-hover:scale-[1.02]"
+                            widths={[480, 800, 1120]}
+                            sizes="(min-width: 640px) 32rem, calc(100vw - 3rem)"
+                          />
+                        </figure>
+                      )}
+                      <p class="kicker mt-4">
+                        {entry.entry.category}
+                        {entry.entry.venueOrClient && ` · ${entry.entry.venueOrClient}`}
+                      </p>
+                      <h2 class="font-display mt-2 text-[1.6rem] text-ink underline decoration-transparent underline-offset-4 transition-colors group-hover:decoration-line">
+                        {entry.entry.title}
+                      </h2>
+                    </a>
+                  </li>
+                );
+              }),
+            )}
+          </ul>
+        )
+      }
+    </div>
+  </section>
+</Base>

@@ -1,0 +1,152 @@
+---
+// NOT LINKED YET — pending client content and approval.
+// Detalle de case study (colección Keystatic). Ver nota en work/index.astro.
+import { Image } from 'astro:assets';
+import Base from '../../layouts/Base.astro';
+import { reader } from '../../lib/keystatic';
+
+export async function getStaticPaths() {
+  const all = await reader.collections.caseStudies.all();
+  return all
+    .filter((entry) => entry.entry.published)
+    .map((entry) => ({ params: { slug: entry.slug } }));
+}
+
+const { slug } = Astro.params;
+const entry = await reader.collections.caseStudies.read(slug!);
+if (!entry) throw new Error(`Case study no encontrado: ${slug}`);
+
+const body = await entry.body();
+
+const caseImages = import.meta.glob<{ default: ImageMetadata }>(
+  '/src/assets/cases/**/*.{jpg,jpeg,png,webp,avif}',
+);
+
+async function resolveImage(path: string | null) {
+  if (!path) return null;
+  const load = caseImages[path];
+  if (!load) throw new Error(`Imagen de case study no encontrada: ${path}`);
+  return (await load()).default;
+}
+
+const cover = await resolveImage(entry.cover);
+const gallery = (await Promise.all((entry.gallery ?? []).map(resolveImage))).filter(
+  (img): img is ImageMetadata => img !== null,
+);
+
+const meta = [
+  entry.venueOrClient,
+  entry.location,
+  entry.year,
+  entry.languages && entry.languages.length > 0 ? entry.languages.join(' · ') : null,
+].filter(Boolean);
+
+// El body es un document de Keystatic con formato acotado (párrafos,
+// negrita, itálica, links): se renderiza acá mismo, sin React en runtime.
+type DocNode = {
+  type?: string;
+  text?: string;
+  bold?: boolean;
+  italic?: boolean;
+  href?: string;
+  children?: DocNode[];
+};
+---
+
+<Base
+  title={entry.title}
+  description={entry.summary}
+>
+  <section class="mx-auto max-w-[68rem] px-6 pt-[10vh] pb-16">
+    <p class="kicker reveal">{entry.category}</p>
+    <h1 class="font-display text-hero mt-6 max-w-4xl text-ink">{entry.title}</h1>
+    {
+      meta.length > 0 && (
+        <p class="kicker reveal mt-8">{meta.join('  ·  ')}</p>
+      )
+    }
+  </section>
+
+  {
+    cover && (
+      <figure class="reveal border-t border-line">
+        <Image
+          src={cover}
+          alt={entry.title}
+          class="aspect-[3/2] w-full object-cover sm:aspect-[2/1]"
+          widths={[768, 1088, 1600, 2048]}
+          sizes="100vw"
+        />
+      </figure>
+    )
+  }
+
+  <section class="border-t border-line">
+    <div class="mx-auto max-w-[68rem] px-6 py-16">
+      <p class="font-display text-title reveal max-w-2xl italic text-ink">
+        {entry.summary}
+      </p>
+      <div class="font-reading mt-10 max-w-2xl space-y-5 text-lg leading-relaxed text-ink-soft">
+        {
+          (body as DocNode[]).map((block) =>
+            block.type === 'paragraph' ? (
+              <p class="reveal">
+                {(block.children ?? []).map((child) =>
+                  child.type === 'link' ? (
+                    <a
+                      href={child.href}
+                      class="text-ink underline decoration-line underline-offset-4 transition-colors hover:decoration-ink"
+                    >
+                      {(child.children ?? []).map((t) => t.text).join('')}
+                    </a>
+                  ) : child.bold && child.italic ? (
+                    <strong><em>{child.text}</em></strong>
+                  ) : child.bold ? (
+                    <strong>{child.text}</strong>
+                  ) : child.italic ? (
+                    <em>{child.text}</em>
+                  ) : (
+                    child.text
+                  ),
+                )}
+              </p>
+            ) : null,
+          )
+        }
+      </div>
+    </div>
+  </section>
+
+  {
+    gallery.length > 0 && (
+      <section class="border-t border-line">
+        <div class="mx-auto max-w-[68rem] px-6 py-16">
+          <p class="kicker reveal">In pictures</p>
+          <div class="mt-8 grid gap-8 sm:grid-cols-2">
+            {gallery.map((img, i) => (
+              <figure class="reveal" style={`transition-delay:${(i % 2) * 90}ms`}>
+                <Image
+                  src={img}
+                  alt={`${entry.title} — photo ${i + 1}`}
+                  class="aspect-[4/3] w-full object-cover"
+                  widths={[480, 800, 1120]}
+                  sizes="(min-width: 640px) 32rem, calc(100vw - 3rem)"
+                />
+              </figure>
+            ))}
+          </div>
+        </div>
+      </section>
+    )
+  }
+
+  <section class="border-t border-line bg-paper-deep">
+    <div class="mx-auto max-w-[68rem] px-6 py-16">
+      <p class="kicker reveal">Next</p>
+      <p class="font-display text-title reveal mt-4 italic text-ink">
+        What are you gathering people for?
+      </p>
+      <a href="/enquire" class="btn reveal mt-8">Start a conversation</a>
+    </div>
+  </section>
+</Base>

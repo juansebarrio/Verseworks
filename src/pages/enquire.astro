@@ -1,11 +1,16 @@
 ---
 import Base from '../layouts/Base.astro';
 import Schema from '../components/Schema.astro';
+import { reader } from '../lib/keystatic';
 import { actions } from 'astro:actions';
 
 export const prerender = false;
 
 const result = Astro.getActionResult(actions.enquire);
+
+// Datos de contacto editables por la clienta (panel Keystatic → Site details)
+const site = await reader.singletons.site.read();
+if (!site) throw new Error('Falta content/site.yaml (singleton "site" de Keystatic)');
 const sent = result && !result.error;
 
 // Campos sobre papel claro para que se despeguen del fondo profundo
@@ -197,9 +202,9 @@ const faqs = [
 
       <div class="mt-16 border-t border-line pt-8 font-mono text-[0.8rem] text-ink-faint">
         <p>Prefer to begin by email?</p>
-        {/* TODO: reemplazar por el email real cuando exista */}
-        <p class="mt-1 text-ink"><a href="mailto:hello@verseworks.example" class="underline decoration-line underline-offset-4 hover:decoration-ink">hello@verseworks.example</a></p>
-        <p class="mt-1">Available for projects internationally.</p>
+        {/* El email real se carga desde el panel (Site details) */}
+        <p class="mt-1 text-ink"><a href={`mailto:${site.enquiryEmail}`} class="underline decoration-line underline-offset-4 hover:decoration-ink">{site.enquiryEmail}</a></p>
+        <p class="mt-1">{site.availabilityLine}</p>
       </div>
     </div>
   </section>

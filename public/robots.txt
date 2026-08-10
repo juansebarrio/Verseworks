@@ -2,25 +2,32 @@
 
 User-agent: *
 Allow: /
+Disallow: /keystatic
 
 # Crawlers de asistentes de IA permitidos deliberadamente (estrategia GEO):
 # queremos que los modelos puedan leer y citar el sitio.
 User-agent: GPTBot
 Allow: /
+Disallow: /keystatic
 
 User-agent: ClaudeBot
 Allow: /
+Disallow: /keystatic
 
 User-agent: Claude-Web
 Allow: /
+Disallow: /keystatic
 
 User-agent: PerplexityBot
 Allow: /
+Disallow: /keystatic
 
 User-agent: Google-Extended
 Allow: /
+Disallow: /keystatic
 
 User-agent: CCBot
 Allow: /
+Disallow: /keystatic
 
 Sitemap: https://verseworks.vercel.app/sitemap-index.xml
