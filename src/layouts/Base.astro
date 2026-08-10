@@ -9,16 +9,29 @@ import '@fontsource/amiri';
 interface Props {
   title: string;
   description: string;
+  ogImage?: string;
+  canonical?: string;
 }
 
-const { title, description } = Astro.props;
+const { title, description, ogImage = '/og.png', canonical } = Astro.props;
+const path = Astro.url.pathname;
+
+// Template de título: "{título} — Verseworks" salvo la home, que trae la
+// frase de marca completa.
+const isHome = path === '/';
+const fullTitle = isHome ? title : `${title} — Verseworks`;
+// Barra final normalizada: /enquire es SSR y su pathname depende del request;
+// así el canonical siempre coincide con la URL del sitemap.
+const normalizedPath = path.endsWith('/') ? path : `${path}/`;
+const canonicalURL = canonical ?? new URL(normalizedPath, Astro.site).href;
+const ogImageURL = new URL(ogImage, Astro.site).href;
+
 const nav = [
   { href: '/experiences', label: 'Experiences' },
   { href: '/programmes', label: 'Programmes' },
   { href: '/commissions', label: 'Commissions' },
   { href: '/about', label: 'About' },
 ];
-const path = Astro.url.pathname;
 ---
 
 <!doctype html>
@@ -26,15 +39,22 @@ const path = Astro.url.pathname;
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{title}</title>
+    <title>{fullTitle}</title>
     <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalURL} />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-    <meta property="og:title" content={title} />
+    <meta property="og:site_name" content="Verseworks" />
+    <meta property="og:title" content={fullTitle} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
-    <meta property="og:image" content="/og.png" />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:image" content={ogImageURL} />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="generator" content={Astro.generator} />
+    {/* Verificación de Google Search Console: descomentar y completar
+        cuando se dé de alta la propiedad (paso manual post-merge).
+    <meta name="google-site-verification" content="TOKEN_AQUI" /> */}
+    <slot name="head" />
   </head>
   <body>
     <header class="border-b border-line">

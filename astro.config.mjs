@@ -12,13 +12,7 @@ export default defineConfig({
   site: 'https://verseworks.vercel.app',
   output: 'static',
   adapter: vercel(),
-  integrations: [
-    sitemap({
-      // /enquire es server-rendered (prerender: false) y la integración
-      // solo indexa páginas estáticas, así que se agrega a mano.
-      customPages: ['https://verseworks.vercel.app/enquire'],
-    }),
-  ],
+  integrations: [sitemap()],
   vite: {
     plugins: [tailwindcss()],
   },
