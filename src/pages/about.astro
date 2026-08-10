@@ -1,11 +1,45 @@
 ---
 import Base from '../layouts/Base.astro';
-// TODO: volcar el copy completo de ABOUT (aproach, red de colaboradores, founder).
+
+const approach = [
+  {
+    title: 'Personalized',
+    body: 'Each project is shaped around its audience, setting and cultural context.',
+  },
+  {
+    title: 'Participatory',
+    body: 'We create ways for people to enter the work rather than only observe it.',
+  },
+  {
+    title: 'Multilingual by design',
+    body: 'Language is considered from the beginning, not added as an afterthought.',
+  },
+  {
+    title: 'Artist-led and professionally produced',
+    body: 'We respect the integrity of the artists while making the commissioning process clear and dependable for clients.',
+  },
+  {
+    title: 'Made to remain',
+    body: 'Even temporary experiences can leave behind a poem, publication, memory or changed relationship to a place.',
+  },
+];
+
+const network = [
+  'Page poets',
+  'Spoken-word artists',
+  'Multilingual writers',
+  'Performers',
+  'Workshop facilitators',
+  'Moderators',
+  'Visual artists',
+  'Designers',
+  'Creative producers',
+];
 ---
 
 <Base
   title="About — Verseworks"
-  description="Verseworks is a multilingual poetry studio founded by Wided Rihana Khadraoui, creating live, participatory experiences through words."
+  description="Verseworks is a multilingual poetry studio founded by Wided Rihana Khadraoui, creating participatory experiences, performances, installations and commissions."
 >
   <section class="mx-auto max-w-[68rem] px-6 pt-[10vh] pb-16">
     <h1 class="font-display text-hero max-w-4xl text-ink">
@@ -23,14 +57,83 @@ import Base from '../layouts/Base.astro';
 
   <section class="border-t border-line">
     <div class="mx-auto max-w-[68rem] px-6 py-16">
+      <h2 class="kicker reveal">About Verseworks</h2>
+      <p class="font-reading reveal mt-8 max-w-2xl text-lg leading-relaxed text-ink">
+        Verseworks is a multilingual poetry studio creating participatory
+        experiences, performances, installations and commissions for festivals,
+        cultural institutions, public spaces, hospitality and brands.
+      </p>
+      <p class="reveal mt-6 max-w-2xl leading-relaxed text-ink-soft">
+        We work with poets, writers, performers, artists and designers to bring
+        language into public and shared spaces.
+      </p>
+      <p class="reveal mt-6 max-w-2xl leading-relaxed text-ink-soft">
+        Our projects range from performances, participatory programmes and
+        public art to installations, multilingual commissions and poems created
+        live with individual participants. Whatever the scale, the purpose is
+        the same: to create a meaningful encounter through words.
+      </p>
+    </div>
+  </section>
+
+  <section class="border-t border-line bg-paper-deep">
+    <div class="mx-auto max-w-[68rem] px-6 py-16 lg:py-24">
+      <h2 class="font-display text-display reveal text-ink">Our approach</h2>
+      <div class="mt-10 grid gap-x-14 gap-y-12 sm:grid-cols-2">
+        {
+          approach.map((a) => (
+            <div class="reveal">
+              <h3 class="font-display text-[1.35rem] text-ink">{a.title}</h3>
+              <p class="mt-3 leading-relaxed text-ink-soft">{a.body}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="border-t border-line">
+    <div class="mx-auto max-w-[68rem] px-6 py-16">
+      <h2 class="font-display text-display reveal text-ink">
+        The people behind the poems
+      </h2>
+      <p class="font-reading reveal mt-5 max-w-2xl text-lg text-ink-soft">
+        Verseworks brings together poets and creative collaborators according
+        to the needs of each commission.
+      </p>
+      <p class="kicker reveal mt-12">Our network includes</p>
+      <ul class="mt-4 grid max-w-3xl gap-x-10 sm:grid-cols-2">
+        {
+          network.map((n, i) => (
+            <li
+              class="reveal border-b border-line py-3 text-ink"
+              style={`transition-delay:${i * 40}ms`}
+            >
+              {n}
+            </li>
+          ))
+        }
+      </ul>
+      <p class="reveal mt-8 max-w-2xl leading-relaxed text-ink-soft">
+        We select collaborators for the context rather than applying one fixed
+        roster to every project.
+      </p>
+    </div>
+  </section>
+
+  <section class="border-t border-line">
+    <div class="mx-auto max-w-[68rem] px-6 py-16">
       <p class="kicker reveal">Founder</p>
       <h2 class="font-display text-display reveal mt-4 text-ink">Wided Rihana Khadraoui</h2>
       <p class="reveal mt-6 max-w-2xl leading-relaxed text-ink-soft">
         Verseworks was founded by Wided Rihana Khadraoui, a published poet,
         cultural strategist and producer working across contemporary art,
-        cultural institutions and international events. Verseworks grew from a
-        simple idea: poetry can be presented not only as literature or
-        performance, but as a generous live encounter between people.
+        cultural institutions and international events. Her work brings
+        together artistic practice, audience experience and cultural
+        production. Verseworks grew from the idea that poetry can operate not
+        only as literature or performance, but as a live medium for
+        participation, something people can enter, shape and encounter
+        together.
       </p>
       <a href="/enquire" class="btn reveal mt-8">Work with Verseworks</a>
     </div>

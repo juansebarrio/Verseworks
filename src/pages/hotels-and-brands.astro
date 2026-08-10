@@ -1,44 +1,219 @@
 ---
 import { Image } from 'astro:assets';
 import Base from '../layouts/Base.astro';
-import photo9 from '../assets/photos/9.jpg';
-import photo10 from '../assets/photos/10.jpg';
-// TODO: volcar el copy completo de FOR HOTELS AND BRANDS.
-// Página fuera de la nav principal: se linkea desde la Home y se usa
+import hotelReading from '../assets/photos/hotel-reading.jpg';
+import listeningGallery from '../assets/photos/listening-gallery.jpg';
+import typewriterLobby from '../assets/photos/typewriter-lobby.jpg';
+// Landing fuera de la nav principal: se linkea desde la Home y se usa
 // como URL directa en outreach comercial.
+
+const hotelOccasions = [
+  'Guest cultural programming',
+  'Hotel openings',
+  'Art and design weeks',
+  'Residencies',
+  'Private dinners',
+  'Weddings and celebrations',
+  'Retreats',
+  "Valentine's Day",
+  "Mother's Day",
+  'Ramadan and Eid',
+  'Festive programming',
+  'Significant local occasions',
+];
+
+const brandOccasions = [
+  'Product and collection launches',
+  'Fashion, fragrance and beauty events',
+  'Retail activations',
+  'Client and VIP experiences',
+  'Campaigns',
+  'Anniversaries',
+  'Exhibitions',
+  'Creative dinners',
+  'Conferences',
+  'Press and influencer events',
+];
+
+const whyPoetry = [
+  {
+    title: 'It creates connection',
+    body: 'Poetry creates a human point of contact — between strangers, audiences, artists, places and ideas.',
+  },
+  {
+    title: 'It is participatory',
+    body: 'Guests become part of the experience rather than watching from a distance.',
+  },
+  {
+    title: 'It is memorable',
+    body: 'A poem can be fleeting or monumental, but the encounter often remains long after the event ends.',
+  },
+  {
+    title: 'It travels',
+    body: 'The experience can work across languages, cultures and locations.',
+  },
+  {
+    title: 'It creates natural stories',
+    body: 'People photograph, share and speak about what happened because it mattered to them — not because they were instructed to post it.',
+  },
+];
+
+const support = [
+  'Creative concept development',
+  'Poet and performer selection',
+  'Multilingual artist curation',
+  'Event format and guest journey',
+  'Spatial, printed and digital formats',
+  'Design and production of publications, editions and poetic objects',
+  'On-site management',
+  'Documentation',
+  'Post-event publications or editions',
+];
 ---
 
 <Base
   title="For hotels and brands — Verseworks"
-  description="Give every guest something that did not exist before they arrived. Live, multilingual poetry activations for hotels, hospitality spaces, brands and private events."
+  description="Poetry, made for the room. Live, multilingual poetry experiences for hotels, hospitality spaces and brands — from intimate encounters to performances, installations and property-wide programmes."
 >
   <section class="mx-auto max-w-[68rem] px-6 pt-[10vh] pb-16">
     <h1 class="font-display text-hero max-w-4xl text-ink">
-      Give every guest something that did not exist before they arrived.
+      Poetry, made for the room.
     </h1>
     <p class="mt-8 max-w-xl leading-relaxed text-ink-soft">
-      Verseworks creates live, multilingual poetry activations for hotels,
-      hospitality spaces, brands and private events. Each experience is
-      personal enough to feel intimate and beautifully produced enough to
-      belong within the wider identity of the host.
+      Verseworks creates live, multilingual poetry experiences for hotels,
+      hospitality spaces and brands — from intimate encounters to performances,
+      installations and property-wide programmes. Each project is shaped around
+      the host, setting and audience, while remaining artist-led and
+      unmistakably alive.
     </p>
-    <a href="/enquire" class="btn mt-10">Create an experience</a>
   </section>
 
-  <figure class="reveal overflow-hidden border-t border-line">
+  <figure class="reveal border-t border-line">
     <Image
-      src={photo9}
-      alt="A quiet hotel corner with a green typewriter on a wooden desk between two armchairs under a warm lamp"
-      class="aspect-[3/2] w-full scale-105 object-cover sm:aspect-[2/1]"
+      src={hotelReading}
+      alt="A poet reading aloud to a small group of guests in a modern hotel lobby"
+      class="aspect-[3/2] w-full object-cover sm:aspect-[2/1]"
       widths={[768, 1088, 1600, 2048]}
       sizes="100vw"
     />
   </figure>
 
+  <section class="border-t border-line">
+    <div class="mx-auto max-w-[68rem] px-6 py-16">
+      <h2 class="font-display text-display reveal text-ink">For hotels</h2>
+      <p class="font-reading reveal mt-5 max-w-2xl text-lg text-ink-soft">
+        Verseworks can inhabit a lobby, lounge, restaurant, terrace, guest room
+        or entire property through live writing, performance, installation,
+        conversation and participatory work. Guests might encounter a poet in
+        conversation, hear a performance, contribute to a collective work,
+        discover poetry throughout the property or leave with a piece created
+        during the experience.
+      </p>
+      <figure class="reveal mt-10 max-w-2xl">
+        <Image
+          src={typewriterLobby}
+          alt="A quiet hotel corner with a green typewriter on a wooden desk between two armchairs"
+          class="aspect-[4/3] w-full object-cover"
+          widths={[640, 960, 1280]}
+          sizes="(min-width: 768px) 42rem, calc(100vw - 3rem)"
+        />
+      </figure>
+      <p class="kicker reveal mt-12">Experiences can be created for</p>
+      <ul class="mt-4 grid max-w-3xl gap-x-10 sm:grid-cols-2">
+        {
+          hotelOccasions.map((o, i) => (
+            <li
+              class="reveal border-b border-line py-3 text-ink"
+              style={`transition-delay:${i * 40}ms`}
+            >
+              {o}
+            </li>
+          ))
+        }
+      </ul>
+      <p class="reveal mt-8 max-w-2xl leading-relaxed text-ink-soft">
+        The experience may last one evening, return regularly or become part of
+        a wider residency.
+      </p>
+    </div>
+  </section>
+
+  <section class="border-t border-line">
+    <div class="mx-auto max-w-[68rem] px-6 py-16">
+      <h2 class="font-display text-display reveal text-ink">For brands</h2>
+      <p class="font-reading reveal mt-5 max-w-2xl text-lg text-ink-soft">
+        Verseworks creates participatory poetry experiences in which the
+        audience does more than look. They might contribute a memory, choose a
+        word, tell a story, enter into conversation, add to a collective work
+        or encounter poetry in an unexpected form.
+      </p>
+      <p class="kicker reveal mt-12">Experiences can be developed for</p>
+      <ul class="mt-4 grid max-w-3xl gap-x-10 sm:grid-cols-2">
+        {
+          brandOccasions.map((o, i) => (
+            <li
+              class="reveal border-b border-line py-3 text-ink"
+              style={`transition-delay:${i * 40}ms`}
+            >
+              {o}
+            </li>
+          ))
+        }
+      </ul>
+      <p class="reveal mt-8 max-w-2xl leading-relaxed text-ink-soft">
+        Poetry can appear across paper, packaging, labels, screens, sound,
+        performance, projection, spatial installations or designed objects —
+        according to the concept. The branding can be visible, subtle or almost
+        absent. The encounter should always feel genuine.
+      </p>
+    </div>
+  </section>
+
+  <section class="border-t border-line bg-paper-deep">
+    <div class="mx-auto max-w-[68rem] px-6 py-16 lg:py-24">
+      <h2 class="font-display text-display reveal text-ink">Why poetry?</h2>
+      <div class="mt-10 grid gap-x-14 gap-y-12 sm:grid-cols-2">
+        {
+          whyPoetry.map((w) => (
+            <div class="reveal">
+              <h3 class="font-display text-[1.35rem] text-ink">{w.title}</h3>
+              <p class="mt-3 leading-relaxed text-ink-soft">{w.body}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="border-t border-line">
+    <div class="mx-auto max-w-[68rem] px-6 py-16">
+      <h2 class="font-display text-display reveal text-ink">Designed around the host</h2>
+      <p class="font-reading reveal mt-5 max-w-2xl text-lg text-ink-soft">
+        Verseworks can create one intimate live encounter or produce a
+        multilingual poetry programme across an entire property, festival or
+        event.
+      </p>
+      <p class="kicker reveal mt-12">We can support</p>
+      <ul class="font-reading mt-4 max-w-2xl text-lg">
+        {
+          support.map((sItem, i) => (
+            <li
+              class="reveal border-b border-line py-3 text-ink last:border-b-0"
+              style={`transition-delay:${i * 50}ms`}
+            >
+              {sItem}
+            </li>
+          ))
+        }
+      </ul>
+      <a href="/enquire" class="btn reveal mt-10">Create an experience</a>
+    </div>
+  </section>
+
   <figure class="reveal border-t border-line">
     <Image
-      src={photo10}
-      alt="A long candlelit dinner table with a small card resting at each place setting"
+      src={listeningGallery}
+      alt="A visitor with headphones listening to a poem in a white gallery space"
       class="aspect-[16/9] w-full object-cover sm:aspect-[21/9]"
       widths={[768, 1088, 1600, 2048]}
       sizes="100vw"

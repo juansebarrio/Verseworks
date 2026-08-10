@@ -1,0 +1,111 @@
+---
+import { Image } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import installationSquare from '../assets/photos/installation-square.jpg';
+import listeningGallery from '../assets/photos/listening-gallery.jpg';
+
+const responses = [
+  'A place',
+  'An exhibition',
+  'A collection',
+  'A product',
+  'A campaign',
+  'An anniversary',
+  'A cultural moment',
+  'A community',
+  "An organisation's story",
+];
+---
+
+<Base
+  title="Creative Commissions — Verseworks"
+  description="Poetry as installation, intervention and public artwork — from projected and printed text to multilingual works, performances and participatory installations."
+>
+  <section class="mx-auto max-w-[68rem] px-6 pt-[10vh] pb-16">
+    <h1 class="font-display text-hero max-w-4xl text-ink">Creative Commissions</h1>
+    <p class="mt-8 max-w-xl leading-relaxed text-ink-soft">
+      Poetry as installation, intervention and public artwork. We develop
+      original concepts in response to architecture, place, audiences and ideas
+      — from projected and printed text to multilingual works, performances and
+      participatory installations.
+    </p>
+  </section>
+
+  <section class="border-t border-line">
+    <div class="mx-auto max-w-[68rem] px-6 py-16">
+      <h2 class="font-display text-display reveal text-ink">Poetry in public space</h2>
+      <p class="font-reading reveal mt-5 max-w-2xl text-lg text-ink-soft">
+        Poetry integrated into architecture, windows, walls, floors, signs,
+        screens, projections and temporary installations. The work may be quiet
+        and easily discovered or large enough to transform the character of a
+        space.
+      </p>
+      <figure class="reveal mt-10 max-w-2xl">
+        <Image
+          src={installationSquare}
+          alt="People walking between large text installations in a public square"
+          class="aspect-[3/2] w-full object-cover mix-blend-multiply"
+          widths={[640, 960, 1280, 1600]}
+          sizes="(min-width: 768px) 42rem, calc(100vw - 3rem)"
+        />
+        <figcaption class="mt-3 font-mono text-[0.72rem] tracking-[0.08em] text-ink-faint">
+          verses, in the square
+        </figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="border-t border-line">
+    <div class="mx-auto max-w-[68rem] px-6 py-16">
+      <h2 class="font-display text-display reveal text-ink">Bespoke texts</h2>
+      <p class="font-reading reveal mt-5 max-w-2xl text-lg text-ink-soft">
+        Original poems and poetic texts commissioned in response to:
+      </p>
+      <ul class="font-reading mt-6 max-w-2xl text-lg">
+        {
+          responses.map((r, i) => (
+            <li
+              class="reveal border-b border-line py-3 text-ink last:border-b-0"
+              style={`transition-delay:${i * 60}ms`}
+            >
+              {r}
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <section class="border-t border-line">
+    <div class="mx-auto max-w-[68rem] px-6 py-16">
+      <h2 class="font-display text-display reveal text-ink">Installations</h2>
+      <p class="font-reading reveal mt-5 max-w-2xl text-lg text-ink-soft">
+        Physical and digital experiences that invite audiences to move through,
+        listen to or contribute to a poem.
+      </p>
+      <figure class="reveal mt-10">
+        <Image
+          src={listeningGallery}
+          alt="A visitor with headphones listening to a poem in a white gallery space"
+          class="aspect-[21/9] w-full object-cover"
+          widths={[768, 1088, 1600, 2048]}
+          sizes="(min-width: 68rem) 65rem, calc(100vw - 3rem)"
+        />
+        <figcaption class="mt-3 font-mono text-[0.72rem] tracking-[0.08em] text-ink-faint">
+          a poem, worn like headphones
+        </figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="border-t border-line">
+    <div class="mx-auto max-w-[68rem] px-6 py-16">
+      <h2 class="font-display text-display reveal text-ink">Publications and editions</h2>
+      <p class="font-reading reveal mt-5 max-w-2xl text-lg text-ink-soft">
+        Poems developed as books, booklets, cards, posters, limited editions or
+        objects.
+      </p>
+      <a href="/enquire" class="btn reveal mt-10">Commission a poetic work</a>
+    </div>
+  </section>
+</Base>

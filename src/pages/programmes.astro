@@ -1,0 +1,107 @@
+---
+import { Image } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import collectiveWall from '../assets/photos/collective-wall.jpg';
+import workshopTable from '../assets/photos/workshop-table.jpg';
+
+const themes = [
+  'Place and belonging',
+  'Memory',
+  'Language',
+  'Identity',
+  'Nature and the environment',
+  'Collections and exhibitions',
+  'Celebration and ritual',
+  'A theme selected by the host',
+];
+---
+
+<Base
+  title="Participatory Programmes — Verseworks"
+  description="Workshops, public programmes and community projects that invite people to write, speak, listen and create together."
+>
+  <section class="mx-auto max-w-[68rem] px-6 pt-[10vh] pb-16">
+    <h1 class="font-display text-hero max-w-4xl text-ink">
+      Participatory Programmes
+    </h1>
+    <p class="mt-8 max-w-xl leading-relaxed text-ink-soft">
+      Workshops, public programmes and community projects that invite people to
+      write, speak, listen and create together.
+    </p>
+  </section>
+
+  <section class="border-t border-line">
+    <div class="mx-auto max-w-[68rem] px-6 py-16">
+      <h2 class="font-display text-display reveal text-ink">Workshops</h2>
+      <p class="font-reading reveal mt-5 max-w-2xl text-lg text-ink-soft">
+        Poetry workshops for children, families, schools, communities,
+        professional groups and public audiences.
+      </p>
+      <figure class="reveal mt-10 max-w-2xl">
+        <Image
+          src={workshopTable}
+          alt="A group talking and writing together around a large table during a workshop"
+          class="aspect-[3/2] w-full object-cover mix-blend-multiply"
+          widths={[640, 960, 1280, 1600]}
+          sizes="(min-width: 768px) 42rem, calc(100vw - 3rem)"
+        />
+        <figcaption class="mt-3 font-mono text-[0.72rem] tracking-[0.08em] text-ink-faint">
+          the table, mid-poem
+        </figcaption>
+      </figure>
+      <p class="kicker reveal mt-12">Programmes can explore</p>
+      <ul class="font-reading mt-4 max-w-2xl text-lg">
+        {
+          themes.map((t, i) => (
+            <li
+              class="reveal border-b border-line py-3 text-ink last:border-b-0"
+              style={`transition-delay:${i * 60}ms`}
+            >
+              {t}
+            </li>
+          ))
+        }
+      </ul>
+      <p class="reveal mt-8 max-w-2xl leading-relaxed text-ink-soft">
+        No previous writing experience is required unless the programme is
+        designed for practising writers.
+      </p>
+    </div>
+  </section>
+
+  <section class="border-t border-line">
+    <div class="mx-auto max-w-[68rem] px-6 py-16">
+      <h2 class="font-display text-display reveal text-ink">Collective poems</h2>
+      <p class="font-reading reveal mt-5 max-w-2xl text-lg text-ink-soft">
+        A room, neighbourhood or event contributes to a single evolving poem.
+        Participants might add one word, complete a line, record a memory or
+        respond to a shared question. Verseworks then shapes the contributions
+        into a collective work.
+      </p>
+      <figure class="reveal mt-10">
+        <Image
+          src={collectiveWall}
+          alt="Many people writing at the same time on a large wall covered in collective text"
+          class="aspect-[21/9] w-full object-cover"
+          widths={[768, 1088, 1600, 2048]}
+          sizes="(min-width: 68rem) 65rem, calc(100vw - 3rem)"
+        />
+        <figcaption class="mt-3 font-mono text-[0.72rem] tracking-[0.08em] text-ink-faint">
+          one poem, many hands
+        </figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="border-t border-line">
+    <div class="mx-auto max-w-[68rem] px-6 py-16">
+      <h2 class="font-display text-display reveal text-ink">Community projects</h2>
+      <p class="font-reading reveal mt-5 max-w-2xl text-lg text-ink-soft">
+        Longer-form programmes developed with a particular community, place or
+        organisation. Outcomes may include publications, performances,
+        recordings, installations or permanent works.
+      </p>
+      <a href="/enquire" class="btn reveal mt-10">Create a participatory programme</a>
+    </div>
+  </section>
+</Base>
