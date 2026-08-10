@@ -1,6 +1,7 @@
 ---
 import { Image } from 'astro:assets';
 import Base from '../layouts/Base.astro';
+import { reader } from '../lib/keystatic';
 import calligraphyStroke from '../assets/photos/calligraphy-stroke.jpg';
 import collectiveWall from '../assets/photos/collective-wall.jpg';
 import exchangeIntimate from '../assets/photos/exchange-intimate.jpg';
@@ -10,6 +11,12 @@ import projectionFacade from '../assets/photos/projection-facade.jpg';
 import workshopTable from '../assets/photos/workshop-table.jpg';
 
 const heroWords = ['This', 'is', 'a', 'poem.'];
+
+// Contenido editable por la clienta (panel Keystatic → Homepage)
+const home = await reader.singletons.home.read();
+if (!home) throw new Error('Falta content/pages/home.yaml (singleton "home" de Keystatic)');
+// Sangrías de la letanía: estructura, queda en código
+const lineIndents = ['', 'pl-[1.5em]', '', 'pl-[1.5em]', 'pl-[3em]'];
 
 const services = [
   {
@@ -109,12 +116,10 @@ const margins = [
       }
     </h1>
     <p class="font-reading mt-8 max-w-xl text-lg text-ink-soft">
-      Poetry, made live.
+      {home.supportLine}
     </p>
     <p class="mt-6 max-w-xl text-[0.98rem] leading-relaxed text-ink-soft">
-      Verseworks is a multilingual poetry studio creating participatory
-      experiences, performances, installations and commissions for festivals,
-      cultural institutions, public spaces, hospitality and brands.
+      {home.description}
     </p>
     <a href="/enquire" class="btn mt-10">Work with us</a>
   </section>
@@ -126,15 +131,12 @@ const margins = [
       <div class="px-6 py-16 lg:gutter-l lg:py-24 lg:pr-16">
         <h2 class="kicker reveal">Poetry, happening here</h2>
         <p class="reveal mt-8 max-w-xl leading-relaxed text-ink-soft">
-          Verseworks creates situations in which people encounter poetry by
-          making it, speaking it, hearing it or becoming part of it.
+          {home.poetryHappeningIntro}
         </p>
         <div class="font-reading mt-10 max-w-xl space-y-4 text-xl text-ink">
-          <p class="reveal">A poem might begin with a conversation between two people.</p>
-          <p class="reveal pl-[1.5em]">It might emerge collectively across a festival.</p>
-          <p class="reveal">It might be performed, projected onto a building,</p>
-          <p class="reveal pl-[1.5em]">written across a wall,</p>
-          <p class="reveal pl-[3em]">whispered into headphones or carried home in someone's pocket.</p>
+          {home.poemMightLines.map((line, i) => (
+            <p class:list={['reveal', lineIndents[i % lineIndents.length]]}>{line}</p>
+          ))}
         </div>
         <p class="font-display text-title reveal mt-12 italic">
           We turn audiences from spectators into participants.
@@ -315,14 +317,10 @@ const margins = [
     <div class="mx-auto max-w-[68rem] px-6 py-16 lg:py-24">
       <h2 class="kicker reveal">A poem belongs here</h2>
       <p class="font-reading reveal mt-8 max-w-2xl text-lg leading-relaxed text-ink">
-        Every project begins with its setting. We do not place the same format
-        into every room. We consider who will be there, how they will encounter
-        the work and what form the poetry should take.
+        {home.aPoemBelongsHere.first}
       </p>
       <p class="reveal mt-6 max-w-2xl leading-relaxed text-ink-soft">
-        From one poet at an intimate gathering to a multilingual programme
-        across an entire festival, Verseworks can shape the concept, select the
-        artists and support the experience from beginning to end.
+        {home.aPoemBelongsHere.second}
       </p>
       {/* La foto cruza el borde hacia el bloque de tinta */}
       <figure class="reveal relative z-10 mt-12 ml-auto w-64 -mb-20 sm:w-80 sm:-mb-24">

@@ -5,6 +5,7 @@ import '@fontsource-variable/hanken-grotesk';
 import '@fontsource/courier-prime';
 import '@fontsource/courier-prime/400-italic.css';
 import '@fontsource/amiri';
+import { reader } from '../lib/keystatic';
 
 interface Props {
   title: string;
@@ -19,6 +20,10 @@ const nav = [
   { href: '/about', label: 'About' },
 ];
 const path = Astro.url.pathname;
+
+// Datos de contacto editables por la clienta (panel Keystatic → Site details)
+const site = await reader.singletons.site.read();
+if (!site) throw new Error('Falta content/site.yaml (singleton "site" de Keystatic)');
 ---
 
 <!doctype html>
@@ -122,9 +127,9 @@ const path = Astro.url.pathname;
             <a href="/enquire" class="w-fit hover:text-ink">Enquire</a>
           </div>
           <div class="font-mono text-[0.75rem] leading-relaxed text-ink-faint">
-            {/* TODO: reemplazar por el email real cuando exista */}
-            <p><a href="mailto:hello@verseworks.example" class="hover:text-ink">hello@verseworks.example</a></p>
-            <p>Available for projects internationally.</p>
+            {/* El email real se carga desde el panel (Site details) */}
+            <p><a href={`mailto:${site.enquiryEmail}`} class="hover:text-ink">{site.enquiryEmail}</a></p>
+            <p>{site.availabilityLine}</p>
           </div>
         </div>
         <p class="kicker mt-10">© {new Date().getFullYear()} Verseworks</p>
