@@ -1,5 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
+import Schema from '../components/Schema.astro';
 import { actions } from 'astro:actions';
 
 export const prerender = false;
@@ -12,12 +13,44 @@ const field =
   'w-full border border-ink/25 bg-paper px-4 py-3 text-[0.95rem] text-ink transition-colors placeholder:text-ink-faint focus:border-ink focus:outline-none';
 const label =
   'mb-2 block font-mono text-[0.72rem] tracking-[0.18em] uppercase text-ink-soft';
+
+// DRAFT — PENDING CLIENT APPROVAL
+// Capa Q&A (fase 2 / B2). Respuestas derivadas exclusivamente del copy
+// aprobado (content/copy-final.md); mismo array alimenta la sección
+// visible y el FAQPage del schema, garantizando el espejo exacto.
+const faqs = [
+  {
+    q: 'What is Verseworks?',
+    a: 'Verseworks is a multilingual poetry studio creating participatory experiences, performances, installations and commissions for festivals, cultural institutions, public spaces, hospitality and brands. We work with poets, writers, performers, artists and designers to bring language into public and shared spaces.',
+  },
+  {
+    q: 'What is a live poetry experience?',
+    a: 'A live poem can begin with a thought, memory, object, feeling, question or prompt. The response may be written, spoken, performed, projected or created digitally — for one person or with an entire room. Every exchange is different because every participant is different.',
+  },
+  {
+    q: 'What kinds of events does Verseworks work with?',
+    a: 'Verseworks can appear almost anywhere: a museum, festival, hotel, dinner, public square, launch, performance or city wall. Experiences are created for festivals and cultural institutions, hotels and hospitality, brands and creative agencies, and public spaces and communities.',
+  },
+  {
+    q: 'Which languages are available?',
+    a: 'Verseworks works with multilingual poets and collaborators to create experiences that reflect the language and cultural context of each audience. One event may unfold in one language or many.',
+  },
+  {
+    q: 'Where does Verseworks operate?',
+    a: 'Verseworks is available for projects internationally. Each experience is developed for the people and place it belongs to.',
+  },
+  {
+    q: 'How does commissioning work?',
+    a: 'You do not need to arrive with a finished concept. Tell us about the place, people and occasion — Verseworks can shape the concept, select the artists and support the experience from beginning to end.',
+  },
+];
 ---
 
 <Base
   title="Poetry for Events & Cultural Event Programming"
   description="Tell us about your event, place or idea — poetry for events, cultural event programming and poetry activations created to belong where they happen."
 >
+  <Schema slot="head" page="enquire" faqs={faqs} />
   <section class="mx-auto max-w-[68rem] px-6 pt-[10vh] pb-16">
     <h1 id="enquire-title" class="font-display text-hero max-w-4xl text-ink">
       What are you gathering people for?
@@ -143,6 +176,25 @@ const label =
           </form>
         )
       }
+      {/* DRAFT — PENDING CLIENT APPROVAL: capa Q&A (fase 2 / B2) */}
+      <section class="mt-16 border-t border-line pt-8" aria-labelledby="faq-heading">
+        <h2 id="faq-heading" class="kicker reveal">Questions, answered</h2>
+        <div class="mt-6 max-w-2xl">
+          {
+            faqs.map((f) => (
+              <details class="group border-b border-line">
+                <summary class="flex cursor-pointer items-baseline justify-between gap-6 py-4 font-reading text-lg text-ink [&::-webkit-details-marker]:hidden [&::marker]:content-none">
+                  {f.q}
+                  <span aria-hidden="true" class="font-mono text-[0.9rem] text-ink-faint group-open:hidden">+</span>
+                  <span aria-hidden="true" class="hidden font-mono text-[0.9rem] text-ink-faint group-open:inline">−</span>
+                </summary>
+                <p class="max-w-xl pb-5 leading-relaxed text-ink-soft">{f.a}</p>
+              </details>
+            ))
+          }
+        </div>
+      </section>
+
       <div class="mt-16 border-t border-line pt-8 font-mono text-[0.8rem] text-ink-faint">
         <p>Prefer to begin by email?</p>
         {/* TODO: reemplazar por el email real cuando exista */}

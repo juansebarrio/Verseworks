@@ -1,5 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
+import Schema from '../components/Schema.astro';
 
 const approach = [
   {
@@ -41,6 +42,7 @@ const network = [
   title="About the Studio & Its Multilingual Poets"
   description="Founded by poet Wided Rihana Khadraoui, Verseworks brings together multilingual poets, performers and artists to create meaningful encounters through words."
 >
+  <Schema slot="head" page="about" />
   <section class="mx-auto max-w-[68rem] px-6 pt-[10vh] pb-16">
     <h1 class="font-display text-hero max-w-4xl text-ink">
       Poetry is not only something we read.

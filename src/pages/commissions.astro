@@ -1,6 +1,7 @@
 ---
 import { Image } from 'astro:assets';
 import Base from '../layouts/Base.astro';
+import Schema from '../components/Schema.astro';
 import installationSquare from '../assets/photos/installation-square.jpg';
 import listeningGallery from '../assets/photos/listening-gallery.jpg';
 
@@ -21,6 +22,7 @@ const responses = [
   title="Bespoke Poetry Commissions & Installations"
   description="Bespoke poetry commissions: poetry in public space, original texts, installations, publications and editions developed for places, audiences and ideas."
 >
+  <Schema slot="head" page="commissions" />
   <section class="mx-auto max-w-[68rem] px-6 pt-[10vh] pb-16">
     <h1 class="font-display text-hero max-w-4xl text-ink">Creative Commissions</h1>
     <p class="mt-8 max-w-xl leading-relaxed text-ink-soft">

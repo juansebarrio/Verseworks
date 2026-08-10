@@ -1,0 +1,182 @@
+---
+// JSON-LD por página (GEO / datos estructurados).
+// @id consistentes y referencias cruzadas: Organization y Person son
+// globales; cada página agrega su tipo específico y un BreadcrumbList.
+// Regla R4: ningún dato que el copy no afirme (sin dirección, teléfono,
+// precios ni fecha de fundación).
+
+type PageKey =
+  | 'home'
+  | 'experiences'
+  | 'programmes'
+  | 'commissions'
+  | 'hotels-and-brands'
+  | 'about'
+  | 'enquire';
+
+interface Faq {
+  q: string;
+  a: string;
+}
+
+interface Props {
+  page: PageKey;
+  faqs?: Faq[];
+}
+
+const { page, faqs } = Astro.props;
+
+const abs = (p: string) => new URL(p, Astro.site).href;
+
+const ORG_ID = abs('/') + '#organization';
+const PERSON_ID = abs('/') + '#founder';
+const WEBSITE_ID = abs('/') + '#website';
+
+// Descripción oficial corta (copy V2, sección About).
+const ORG_DESCRIPTION =
+  'Verseworks is a multilingual poetry studio creating participatory experiences, performances, installations and commissions for festivals, cultural institutions, public spaces, hospitality and brands.';
+
+const organization = {
+  '@type': 'Organization',
+  '@id': ORG_ID,
+  name: 'Verseworks',
+  url: abs('/'),
+  logo: abs('/favicon.svg'),
+  description: ORG_DESCRIPTION,
+  founder: { '@id': PERSON_ID },
+  knowsLanguage: ['en', 'ar', 'fr', 'es'],
+  areaServed: 'Worldwide',
+};
+
+const person = {
+  '@type': 'Person',
+  '@id': PERSON_ID,
+  name: 'Wided Rihana Khadraoui',
+  jobTitle: 'Founder',
+  // Del copy de About (sección Founder).
+  description:
+    'A published poet, cultural strategist and producer working across contemporary art, cultural institutions and international events.',
+  worksFor: { '@id': ORG_ID },
+};
+
+// Nombre legible por página para el breadcrumb.
+const PAGE_NAMES: Record<PageKey, string> = {
+  home: 'Home',
+  experiences: 'Live Experiences',
+  programmes: 'Participatory Programmes',
+  commissions: 'Creative Commissions',
+  'hotels-and-brands': 'For hotels and brands',
+  about: 'About',
+  enquire: 'Enquire',
+};
+
+const pagePath = page === 'home' ? '/' : `/${page}/`;
+
+const breadcrumb =
+  page === 'home'
+    ? null
+    : {
+        '@type': 'BreadcrumbList',
+        '@id': abs(pagePath) + '#breadcrumb',
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: 'Home', item: abs('/') },
+          { '@type': 'ListItem', position: 2, name: PAGE_NAMES[page], item: abs(pagePath) },
+        ],
+      };
+
+const service = (id: string, name: string, serviceType: string, description: string) => ({
+  '@type': 'Service',
+  '@id': abs(id) + '#service',
+  name,
+  serviceType,
+  description,
+  provider: { '@id': ORG_ID },
+  areaServed: 'Worldwide',
+});
+
+// Descriptions de Service tomadas del copy visible de cada página.
+const PAGE_SCHEMAS: Record<PageKey, object[]> = {
+  home: [
+    {
+      '@type': 'WebSite',
+      '@id': WEBSITE_ID,
+      url: abs('/'),
+      name: 'Verseworks',
+      description: ORG_DESCRIPTION,
+      publisher: { '@id': ORG_ID },
+    },
+  ],
+  experiences: [
+    service(
+      '/experiences/',
+      'Live Experiences',
+      'Live poetry experiences',
+      'Poetry becomes an experience when someone enters it. Encounters that can be heard, held, entered, contributed to and taken home: poems made live, poetry performances, poetic hosting and poetry that remains.',
+    ),
+  ],
+  programmes: [
+    service(
+      '/programmes/',
+      'Participatory Programmes',
+      'Poetry workshops and participatory programmes',
+      'Workshops, public programmes and community projects that invite people to write, speak, listen and create together.',
+    ),
+  ],
+  commissions: [
+    service(
+      '/commissions/',
+      'Creative Commissions',
+      'Bespoke poetry commissions',
+      'Poetry as installation, intervention and public artwork. Original concepts developed in response to architecture, place, audiences and ideas — from projected and printed text to multilingual works, performances and participatory installations.',
+    ),
+  ],
+  'hotels-and-brands': [
+    service(
+      '/hotels-and-brands/',
+      'Poetry for hotels and brands',
+      'Hospitality and brand experiences',
+      'Live, multilingual poetry experiences for hotels, hospitality spaces and brands — from intimate encounters to performances, installations and property-wide programmes. Each project is shaped around the host, setting and audience.',
+    ),
+  ],
+  about: [
+    {
+      '@type': 'AboutPage',
+      '@id': abs('/about/') + '#webpage',
+      url: abs('/about/'),
+      name: 'About Verseworks',
+      description: ORG_DESCRIPTION,
+      about: { '@id': ORG_ID },
+    },
+  ],
+  enquire: [
+    {
+      '@type': 'ContactPage',
+      '@id': abs('/enquire/') + '#webpage',
+      url: abs('/enquire/'),
+      name: 'Enquire',
+      about: { '@id': ORG_ID },
+    },
+  ],
+};
+
+const graph: object[] = [organization, person, ...PAGE_SCHEMAS[page]];
+if (breadcrumb) graph.push(breadcrumb);
+
+// FAQPage: espejo exacto de la capa Q&A visible (regla de Google —
+// solo preguntas y respuestas presentes en la página).
+if (faqs && faqs.length > 0) {
+  graph.push({
+    '@type': 'FAQPage',
+    '@id': abs(pagePath) + '#faq',
+    mainEntity: faqs.map((f) => ({
+      '@type': 'Question',
+      name: f.q,
+      acceptedAnswer: { '@type': 'Answer', text: f.a },
+    })),
+  });
+}
+
+const jsonLd = JSON.stringify({ '@context': 'https://schema.org', '@graph': graph });
+---
+
+<script type="application/ld+json" set:html={jsonLd} is:inline />

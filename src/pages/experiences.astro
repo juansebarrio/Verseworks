@@ -1,6 +1,7 @@
 ---
 import { Image } from 'astro:assets';
 import Base from '../layouts/Base.astro';
+import Schema from '../components/Schema.astro';
 import performanceCrowd from '../assets/photos/performance-crowd.jpg';
 import printedMatter from '../assets/photos/printed-matter.jpg';
 
@@ -17,6 +18,7 @@ const formats = [
   title="Live Poetry Experiences & Live Poets for Events"
   description="Poems made live for one person or an entire room: performances, readings, poetic hosting and live poets for events, festivals and cultural programmes."
 >
+  <Schema slot="head" page="experiences" />
   <section class="mx-auto max-w-[68rem] px-6 pt-[10vh] pb-16">
     <h1 class="font-display text-hero max-w-4xl text-ink">
       Poetry becomes an experience when someone enters it.

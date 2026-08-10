@@ -1,6 +1,7 @@
 ---
 import { Image } from 'astro:assets';
 import Base from '../layouts/Base.astro';
+import Schema from '../components/Schema.astro';
 import collectiveWall from '../assets/photos/collective-wall.jpg';
 import workshopTable from '../assets/photos/workshop-table.jpg';
 
@@ -20,6 +21,7 @@ const themes = [
   title="Poetry Workshops & Participatory Public Art"
   description="Poetry workshops, collective poems and community projects — participatory public art that invites people to write, speak, listen and create together."
 >
+  <Schema slot="head" page="programmes" />
   <section class="mx-auto max-w-[68rem] px-6 pt-[10vh] pb-16">
     <h1 class="font-display text-hero max-w-4xl text-ink">
       Participatory Programmes

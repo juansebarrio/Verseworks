@@ -1,6 +1,7 @@
 ---
 import { Image } from 'astro:assets';
 import Base from '../layouts/Base.astro';
+import Schema from '../components/Schema.astro';
 import hotelReading from '../assets/photos/hotel-reading.jpg';
 import listeningGallery from '../assets/photos/listening-gallery.jpg';
 import typewriterLobby from '../assets/photos/typewriter-lobby.jpg';
@@ -75,6 +76,7 @@ const support = [
   title="Hotel Guest Experiences & Brand Activations"
   description="Live, multilingual poetry for hospitality and brands: hotel guest experiences, brand activations, performances and installations shaped around the host."
 >
+  <Schema slot="head" page="hotels-and-brands" />
   <section class="mx-auto max-w-[68rem] px-6 pt-[10vh] pb-16">
     <h1 class="font-display text-hero max-w-4xl text-ink">
       Poetry, made for the room.

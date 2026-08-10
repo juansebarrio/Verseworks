@@ -1,6 +1,7 @@
 ---
 import { Image } from 'astro:assets';
 import Base from '../layouts/Base.astro';
+import Schema from '../components/Schema.astro';
 import calligraphyStroke from '../assets/photos/calligraphy-stroke.jpg';
 import collectiveWall from '../assets/photos/collective-wall.jpg';
 import exchangeIntimate from '../assets/photos/exchange-intimate.jpg';
@@ -92,6 +93,7 @@ const margins = [
   title="Verseworks — This is a poem. Live poetry experiences"
   description="A multilingual poetry studio creating live poetry experiences, performances, installations and poetry commissions for festivals, hotels and brands."
 >
+  <Schema slot="head" page="home" />
   <!-- 1 · Intriga: tipografía sola sobre papel -->
   <section class="mx-auto max-w-[68rem] px-6 pt-[14vh] pb-[12vh]">
     <h1 class="font-display text-hero italic text-ink">
