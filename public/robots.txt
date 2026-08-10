@@ -1,0 +1,4 @@
+# NOTA: la rama phase-2-seo-geo también crea robots.txt (SEO/GEO).
+# Al mergear ambas ramas hay que unificar los dos archivos.
+User-agent: *
+Disallow: /keystatic
