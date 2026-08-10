@@ -1,0 +1,6 @@
+# Verseworks — robots.txt
+
+User-agent: *
+Allow: /
+
+Sitemap: https://verseworks.vercel.app/sitemap-index.xml
