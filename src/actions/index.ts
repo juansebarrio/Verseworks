@@ -2,7 +2,7 @@ import { defineAction } from 'astro:actions';
 import { z } from 'astro:schema';
 import { Resend } from 'resend';
 
-const TO = import.meta.env.ENQUIRY_TO_EMAIL ?? 'hello@verseworks.example';
+const TO = import.meta.env.ENQUIRY_TO_EMAIL ?? 'wided.khadraoui@gmail.com';
 const FROM = import.meta.env.ENQUIRY_FROM_EMAIL ?? 'Verseworks <onboarding@resend.dev>';
 
 export const server = {

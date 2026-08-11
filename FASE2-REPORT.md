@@ -146,7 +146,8 @@ Cuatro agentes independientes de la implementación:
 2. **`RESEND_API_KEY` sin configurar en Vercel**: el formulario muestra
    "Received." pero la consulta solo queda en logs. Riesgo de negocio ya
    reportado; se resuelve cargando la key (Settings → Environment Variables).
-3. **Email placeholder** (`hello@verseworks.example`) en footer y Enquire.
+3. ~~**Email placeholder** en footer y Enquire.~~ Resuelto: ahora es
+   `wided.khadraoui@gmail.com` (editable desde el panel, Site details).
 4. **Dominio propio pendiente**: al existir, actualizar `site` en
    `astro.config.mjs` (canonicals, og, sitemap y schema se regeneran solos),
    el `Sitemap:` de `robots.txt` y las URLs de `llms.txt`.
